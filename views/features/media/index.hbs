@@ -1,0 +1,15 @@
+{{#> app}}
+    {{#*inline "content"}}
+        <div class="mt-4">
+            <ol>
+                {{#each data.medias}}
+                <li>
+                    <a href="/media/{{ id }}">
+                        {{ name }}
+                    </a>
+                </li>    
+                {{/each}}
+            </ol>
+        </div>
+    {{/inline}}
+{{/app}}
