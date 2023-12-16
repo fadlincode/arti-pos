@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { MediaController } from './media/media.controller';
 import { Media } from './media/media.entity';
 import { MediaService } from './media/media.service';
@@ -10,7 +10,7 @@ import { MediaService } from './media/media.service';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.env'
+      envFilePath: '.env',
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -19,12 +19,10 @@ import { MediaService } from './media/media.service';
       username: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      entities: ["dist/**/*.entity{.ts,.js}"],
+      entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([
-      Media,
-    ])
+    TypeOrmModule.forFeature([Media]),
   ],
   controllers: [AppController, MediaController],
   providers: [AppService, MediaService],

@@ -11,10 +11,10 @@ async function bootstrap() {
   // Add folder static
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
-  
+
   // Add partial folder
-  hbs.registerPartials(join(__dirname, '..', 'views/layouts'));
-  hbsUtils(hbs).registerWatchedPartials(join(__dirname, '..', 'views/layouts'));
+  hbs.registerPartials(join(__dirname, '..', 'views'));
+  hbsUtils(hbs).registerWatchedPartials(join(__dirname, '..', 'views'));
 
   app.setViewEngine('hbs');
 
@@ -23,7 +23,7 @@ async function bootstrap() {
     appName: 'APP_NAME',
     appDescription: 'APP_DESCRIPTION',
   };
-  
+
   Object.entries(helpers).forEach(([helperName, envVariable]) => {
     hbs.registerHelper(helperName, () => process.env[envVariable]);
   });
