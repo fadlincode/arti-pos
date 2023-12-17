@@ -9,6 +9,8 @@ import { MediaService } from './admin/media/media.service';
 import { AdminModule } from './admin/admin.module';
 import { Language } from './admin/language/language.entity';
 import { LanguageService } from './admin/language/language.service';
+import { JournalistService } from './admin/journalist/journalist.service';
+import { Journalist } from './admin/journalist/journalist.entity';
 
 @Global()
 @Module({
@@ -28,12 +30,13 @@ import { LanguageService } from './admin/language/language.service';
     }),
     TypeOrmModule.forFeature([
       Media,
-      Language
+      Language,
+      Journalist
     ]),
     AdminModule
   ],
-  controllers: [AppController, MediaController],
-  providers: [AppService, LanguageService, MediaService],
-  exports: [LanguageService]
+  controllers: [AppController],
+  providers: [AppService, LanguageService, MediaService, JournalistService],
+  exports: [LanguageService, MediaService, JournalistService]
 })
 export class AppModule {}

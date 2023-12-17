@@ -8,17 +8,17 @@
                     <div class="card-header flex-wrap py-3 justify-content-between">
                         <div class="card-title">
                             {{ data.title }}
-                            {{#with data.media}}
+                            {{#with data.journalist}}
                         </div>
                         <div class="card-toolbar">
                             <ul class="nav nav-pills nav-pills-sm nav-dark-75">
                                 <li class="nav-item d-flex align-items-center">
-                                    <a class="btn btn-outline-success btn-icon" href="/admin/medias" title="Refresh">
+                                    <a class="btn btn-outline-success btn-icon" href="/admin/journalists" title="Refresh">
                                         <i class="fas fa-arrow-left"></i>
                                     </a>
                                 </li>
                                 <li class="nav-item d-flex align-items-center">
-                                    <a class="btn btn-outline-success btn-icon" href="/admin/medias/{{ getId }}" title="Refresh">
+                                    <a class="btn btn-outline-success btn-icon" href="/admin/journalists/{{ getId }}" title="Refresh">
                                         <i class="fas fa-undo"></i>
                                     </a>
                                 </li>
@@ -27,18 +27,14 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <form action="/admin/medias/{{ getId }}/update" method="POST">                     
+                            <form action="/admin/journalists/{{ getId }}/update" method="POST" enctype="multipart/form-data">                     
                                 <div class="form-group">
                                     <label for="name">Nama <span class="text-danger">*</span></label>
                                     <input class="form-control form-control-lg" name="name" id="name" type="text" placeholder="Nama" value="{{ getName }}" required/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="url">URL </label>
-                                    <input class="form-control form-control-lg" name="url" id="url" type="text" placeholder="URL" value="{{ getUrl }}"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="logo">Logo </label>
-                                    <input class="form-control form-control-lg" name="logo" id="logo" type="text" placeholder="Logo" value="{{ getLogo }}"/>
+                                    <label for="photo">Photo </label>
+                                    <input class="form-control form-control-lg" name="photo" id="photo" type="file" placeholder="Photo"/>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="reset" class="btn btn-secondary" data-dismiss="modal">Reset</button>
