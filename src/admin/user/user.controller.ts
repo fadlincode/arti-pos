@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Post, Redirect, Render } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './user.entity';
+import * as bcrypt from 'bcrypt';
 
 @Controller('/admin/users')
 export class UserController {
@@ -53,8 +54,9 @@ export class UserController {
 
         user.setName(body.name);
         user.setEmail(body.email);
-        if (body.password) {
-            user.setPassword(body.password);
+        if (body.password !== "") {
+            const hash = await bcrypt.hash(user.getPassword(), 10);
+            user.setPassword(hash);    
         }
         await this.userService.createOrUpdate(user);
     }
