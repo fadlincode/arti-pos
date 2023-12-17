@@ -25,6 +25,4 @@ export class LanguageService {
     async remove(id: number): Promise<void> {
         await this.languageRepository.delete(id);
     }
-
-
 }

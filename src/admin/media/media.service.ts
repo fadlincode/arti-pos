@@ -5,17 +5,24 @@ import { Media } from './media.entity';
 
 @Injectable()
 export class MediaService {
-  constructor(
-    @InjectRepository(Media)
-    private mediaRepository: Repository<Media>,
-  ) {}
+    constructor(
+        @InjectRepository(Media)
+        private mediaRepository: Repository<Media>,
+    ) {}
 
-  findAll(): Promise<Media[]> {
-    return this.mediaRepository.find();
-  }
+    findAll(): Promise<Media[]> {
+        return this.mediaRepository.find();
+    }
 
-  findOne(id: number): Promise<Media | null> {
-    return this.mediaRepository.findOneBy({ id });
-  }
-  
+    findOne(id: number): Promise<Media | null> {
+        return this.mediaRepository.findOneBy({ id });
+    }
+    
+    createOrUpdate(media: Media): Promise<Media> {
+        return this.mediaRepository.save(media);
+    }
+
+    async remove(id: number): Promise<void> {
+        await this.mediaRepository.delete(id);
+    }
 }
