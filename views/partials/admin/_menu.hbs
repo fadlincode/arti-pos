@@ -1,0 +1,122 @@
+<div id="kt_header_mobile" class="header-mobile bg-primary  header-mobile-fixed " >
+    <a href="/admin">
+        <img alt="Logo" src="/assets/media/logos/logo-letter-9.png" class="max-h-30px"/>
+    </a>
+    
+    <div class="d-flex align-items-center">
+        <button class="btn p-0 burger-icon burger-icon-left ml-4" id="kt_header_mobile_toggle">
+        <span></span>
+        </button>
+        <button class="btn p-0 ml-4" id="kt_header_mobile_topbar_toggle">
+            <i class="fas fa-th icon-2x"></i>
+        </button>
+    </div>
+</div>
+
+<div class="d-flex flex-column flex-root">
+<div class="d-flex flex-row flex-column-fluid page">
+<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+<div id="kt_header" class="header flex-column  header-fixed " >
+    <div class="header-top">
+        <div class=" container ">
+            <div class="d-none d-lg-flex align-items-center mr-3">
+                <a href="/admin" class="mr-20">
+                    <img alt="Logo" src="/assets/media/logos/logo-letter-9.png" class="max-h-35px"/>
+                </a>
+
+                <div class="quick-search quick-search-inline ml-4 w-800px" id="kt_quick_search_inline">
+                    <div id="kt_quick_search_toggle" data-toggle="dropdown" data-offset="0px,1px"></div>
+                    <div class="dropdown-menu dropdown-menu-left dropdown-menu-lg dropdown-menu-anim-up">
+                        <div class="quick-search-wrapper scroll" data-scroll="true" data-height="350" data-mobile-height="200">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="topbar">
+                <div class="dropdown d-flex d-lg-none">
+                    <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
+                        <div class="btn btn-icon btn-hover-transparent-white btn-lg btn-dropdown mr-1">
+                            <i class="fas fa-search text-white"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg">
+                        <div class="quick-search quick-search-dropdown" id="kt_quick_search_dropdown">
+                            <div class="quick-search-wrapper scroll" data-scroll="true" data-height="325" data-mobile-height="200">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
+                        <div class="btn btn-icon btn-hover-transparent-white btn-dropdown btn-lg mr-1 pulse pulse-white">
+                            {{!-- Icon here --}}
+                            <span class="pulse-ring"></span>
+                        </div>
+                    </div>
+                    <div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <div class="container">
+            <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
+                <div id="kt_header_menu" class="header-menu header-menu-left header-menu-mobile header-menu-layout-default " >
+                    <ul class="menu-nav ">
+                        <li class="menu-item menu-item-open menu-item-submenu menu-item-rel menu-item-open">
+                            <a href="/admin" class="menu-link"><span class="menu-text">Dashboard</span></a>
+                        </li>
+                        <li class="menu-item menu-item-submenu menu-item-rel"  data-menu-toggle="hover" aria-haspopup="true">
+                            <a  href="javascript:;" class="menu-link menu-toggle"><span class="menu-text">Master Data</span><i class="menu-arrow"></i></a>
+                            <div class="menu-submenu menu-submenu-classic menu-submenu-left" >
+                                <ul class="menu-subnav">
+                                    <li class="menu-item menu-item-submenu">
+                                        <a  href="/admin/languages" class="menu-link">
+                                            <span class="menu-text">Bahasa</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item menu-item-submenu">
+                                        <a  href="/admin/medias" class="menu-link">
+                                            <span class="menu-text">Media</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item menu-item-submenu">
+                                        <a  href="/admin/journalists" class="menu-link">
+                                            <span class="menu-text">Jurnalis</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="menu-item menu-item-open menu-item-submenu menu-item-rel menu-item-open">
+                            <a href="/admin" class="menu-link"><span class="menu-text">News</span></a>
+                        </li>
+                        <li class="menu-item menu-item-open menu-item-submenu menu-item-rel menu-item-open">
+                            <a href="/admin" class="menu-link"><span class="menu-text">Keyword Generated</span></a>
+                        </li>
+                        <li class="menu-item menu-item-submenu menu-item-rel"  data-menu-toggle="hover" aria-haspopup="true">
+                            <a  href="javascript:;" class="menu-link menu-toggle"><span class="menu-text">Apps Setup</span><i class="menu-arrow"></i></a>
+                            <div class="menu-submenu menu-submenu-classic menu-submenu-left" >
+                                <ul class="menu-subnav">
+                                    <li class="menu-item menu-item-submenu">
+                                        <a  href="javascript:;" class="menu-link menu-toggle">
+                                            <span class="menu-text">Users</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item menu-item-submenu">
+                                        <a  href="javascript:;" class="menu-link menu-toggle">
+                                            <span class="menu-text">Settings</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

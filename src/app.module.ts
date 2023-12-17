@@ -1,12 +1,16 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { MediaController } from './media/media.controller';
-import { Media } from './media/media.entity';
-import { MediaService } from './media/media.service';
+import { MediaController } from './admin/media/media.controller';
+import { Media } from './admin/media/media.entity';
+import { MediaService } from './admin/media/media.service';
+import { AdminModule } from './admin/admin.module';
+import { Language } from './admin/language/language.entity';
+import { LanguageService } from './admin/language/language.service';
 
+@Global()
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -22,9 +26,14 @@ import { MediaService } from './media/media.service';
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Media]),
+    TypeOrmModule.forFeature([
+      Media,
+      Language
+    ]),
+    AdminModule
   ],
   controllers: [AppController, MediaController],
-  providers: [AppService, MediaService],
+  providers: [AppService, LanguageService, MediaService],
+  exports: [LanguageService]
 })
 export class AppModule {}

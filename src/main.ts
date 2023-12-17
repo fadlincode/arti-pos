@@ -28,6 +28,14 @@ async function bootstrap() {
     hbs.registerHelper(helperName, () => process.env[envVariable]);
   });
 
+  // register math helper
+  hbs.registerHelper('eval', function(...e) {      
+    e.pop();
+    const args = e.join('');
+        return eval(args)  ;
+    }
+  );
+
   await app.listen(3000);
 }
 bootstrap();

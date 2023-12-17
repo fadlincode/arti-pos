@@ -17,4 +17,5 @@ export class MediaService {
   findOne(id: number): Promise<Media | null> {
     return this.mediaRepository.findOneBy({ id });
   }
+  
 }
