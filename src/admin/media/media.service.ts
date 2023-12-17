@@ -17,6 +17,10 @@ export class MediaService {
     findOne(id: number): Promise<Media | null> {
         return this.mediaRepository.findOneBy({ id });
     }
+
+    findCount(): Promise<number> {
+        return this.mediaRepository.count();
+    }
     
     createOrUpdate(media: Media): Promise<Media> {
         return this.mediaRepository.save(media);

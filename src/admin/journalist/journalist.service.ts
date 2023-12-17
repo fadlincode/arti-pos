@@ -18,6 +18,10 @@ export class JournalistService {
         return this.journalistRepository.findOneBy({ id });
     }
 
+    findCount(): Promise<number> {
+        return this.journalistRepository.count();
+    }
+
     createOrUpdate(journalist: Journalist): Promise<Journalist> {
         return this.journalistRepository.save(journalist);
     }

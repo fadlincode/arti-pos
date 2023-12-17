@@ -18,6 +18,10 @@ export class UserService {
     findOne(id: number): Promise<User | null> {
         return this.userRepository.findOneBy({ id });
     }
+
+    findCount(): Promise<number> {
+        return this.userRepository.count();
+    }
     
     async createOrUpdate(user: User): Promise<User> {
         if (user.password === "") {
