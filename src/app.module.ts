@@ -11,6 +11,8 @@ import { Language } from './admin/language/language.entity';
 import { LanguageService } from './admin/language/language.service';
 import { JournalistService } from './admin/journalist/journalist.service';
 import { Journalist } from './admin/journalist/journalist.entity';
+import { Category } from './admin/category/category.entity';
+import { CategoryService } from './admin/category/category.service';
 
 @Global()
 @Module({
@@ -31,12 +33,13 @@ import { Journalist } from './admin/journalist/journalist.entity';
     TypeOrmModule.forFeature([
       Media,
       Language,
-      Journalist
+      Journalist,
+      Category
     ]),
     AdminModule
   ],
   controllers: [AppController],
-  providers: [AppService, LanguageService, MediaService, JournalistService],
-  exports: [LanguageService, MediaService, JournalistService]
+  providers: [AppService, LanguageService, MediaService, JournalistService, CategoryService],
+  exports: [LanguageService, MediaService, JournalistService, CategoryService]
 })
 export class AppModule {}
