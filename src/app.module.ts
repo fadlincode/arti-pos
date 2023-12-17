@@ -13,6 +13,8 @@ import { JournalistService } from './admin/journalist/journalist.service';
 import { Journalist } from './admin/journalist/journalist.entity';
 import { Category } from './admin/category/category.entity';
 import { CategoryService } from './admin/category/category.service';
+import { User } from './admin/user/user.entity';
+import { UserService } from './admin/user/user.service';
 
 @Global()
 @Module({
@@ -34,12 +36,13 @@ import { CategoryService } from './admin/category/category.service';
       Media,
       Language,
       Journalist,
-      Category
+      Category,
+      User
     ]),
     AdminModule
   ],
   controllers: [AppController],
-  providers: [AppService, LanguageService, MediaService, JournalistService, CategoryService],
-  exports: [LanguageService, MediaService, JournalistService, CategoryService]
+  providers: [AppService, LanguageService, MediaService, JournalistService, CategoryService, UserService],
+  exports: [LanguageService, MediaService, JournalistService, CategoryService, UserService]
 })
 export class AppModule {}
