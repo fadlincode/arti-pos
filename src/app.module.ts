@@ -15,6 +15,8 @@ import { Category } from './admin/category/category.entity';
 import { CategoryService } from './admin/category/category.service';
 import { User } from './admin/user/user.entity';
 import { UserService } from './admin/user/user.service';
+import { Article } from './admin/article/article.entity';
+import { ArticleService } from './admin/article/article.service';
 
 @Global()
 @Module({
@@ -37,12 +39,28 @@ import { UserService } from './admin/user/user.service';
       Language,
       Journalist,
       Category,
-      User
+      User,
+      Article
     ]),
     AdminModule
   ],
   controllers: [AppController],
-  providers: [AppService, LanguageService, MediaService, JournalistService, CategoryService, UserService],
-  exports: [LanguageService, MediaService, JournalistService, CategoryService, UserService]
+  providers: [
+    AppService, 
+    LanguageService, 
+    MediaService, 
+    JournalistService, 
+    CategoryService, 
+    UserService,
+    ArticleService
+  ],
+  exports: [
+    LanguageService,
+    MediaService,
+    JournalistService,
+    CategoryService,
+    UserService,
+    ArticleService
+  ]
 })
 export class AppModule {}

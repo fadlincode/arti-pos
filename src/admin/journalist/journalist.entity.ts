@@ -8,8 +8,8 @@ export class Journalist {
     @Column()
     name: string;
 
-    @Column()
-    photo: string
+    @Column({ nullable: true })
+    photo?: string
 
     getId(): number {
         return this.id;

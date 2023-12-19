@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Article } from '../article/article.entity';
 
 @Entity({ name: 'medias' })
 export class Media {
@@ -8,11 +9,11 @@ export class Media {
   @Column()
   name: string;
 
-  @Column()
-  logo: string;
+  @Column({ nullable: true })
+  logo?: string;
 
-  @Column()
-  url: string;
+  @Column({ nullable: true })
+  url?: string;
 
   getId(): number {
     return this.id;
@@ -41,4 +42,16 @@ export class Media {
   setUrl(url: string) {
     this.url = url;
   }
+
+  getArticles(): Article[] {
+    return this.articles;
+  }
+
+  setArticles(articles: Article[]) {
+    this.articles = articles;
+  }
+
+  @OneToMany(() => Article, (article) => article.media)
+  articles: Article[]
+
 }
