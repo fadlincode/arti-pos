@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { Category } from './category.entity';
 
 @Injectable()
@@ -10,8 +10,13 @@ export class CategoryService {
         private categoryRepository: Repository<Category>,
     ) {}
 
-    findAll(): Promise<Category[]> {
-        return this.categoryRepository.find();
+    findAll(limit: number, searchTerm: string): Promise<Category[]> {
+        return this.categoryRepository.find({
+            take: limit,
+            where: {
+                name: Like(`%${searchTerm}%`),
+            },
+        });
     }
 
     findOne(id: number): Promise<Category | null> {

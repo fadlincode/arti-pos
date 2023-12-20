@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Redirect, Render } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, Redirect, Render } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './user.entity';
 import * as bcrypt from 'bcrypt';
@@ -9,10 +9,17 @@ export class UserController {
 
     @Get('/')
     @Render('features/admin/user/index')
-    async index() {
+    async index(
+        @Query('limit') limit: number,
+        @Query('searchTerm') searchTerm: string
+    ) {
+        limit = limit || 10;
+        searchTerm = searchTerm || '';
+
         const data = {
             title: 'User',
-            users: await this.userService.findAll()
+            users: await this.userService.findAll(limit, searchTerm),
+            searchTerm: searchTerm
         }
 
         return {

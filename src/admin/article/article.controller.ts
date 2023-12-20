@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Redirect, Render } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, Redirect, Render } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { Article } from './article.entity';
 
@@ -8,10 +8,17 @@ export class ArticleController {
 
     @Get('/')
     @Render('features/admin/article/index')
-    async index() {
+    async index(
+        @Query('limit') limit: number,
+        @Query('searchTerm') searchTerm: string
+    ) {
+        limit = limit || 10;
+        searchTerm = searchTerm || '';
+
         const data = {
             title: 'Article',
-            articles: await this.articleService.findAll()
+            articles: await this.articleService.findAll(limit, searchTerm),
+            searchTerm: searchTerm
         }
 
         return {

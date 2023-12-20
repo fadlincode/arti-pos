@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Redirect, Render } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, Redirect, Render } from '@nestjs/common';
 import { MediaService } from './media.service';
 import { Media } from './media.entity';
 
@@ -8,10 +8,17 @@ export class MediaController {
 
     @Get('/')
     @Render('features/admin/media/index')
-    async index() {
+    async index(
+        @Query('limit') limit: number,
+        @Query('searchTerm') searchTerm: string
+    ) {
+        limit = limit || 10;
+        searchTerm = searchTerm || '';
+
         const data = {
             title: 'Media',
-            medias: await this.mediaService.findAll()
+            medias: await this.mediaService.findAll(limit, searchTerm),
+            searchTerm: searchTerm
         }
 
         return {

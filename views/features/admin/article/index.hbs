@@ -21,9 +21,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item d-flex align-items-center">
-                                    <form action="http://localhost:8000/article" method="GET">
+                                    <form action="/admin/articles" method="GET">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="search" placeholder="Search for..." />
+                                            <input type="text" class="form-control" name="searchTerm" placeholder="Search for..." />
                                             <div class="input-group-append">
                                                 <button class="btn btn-success" type="submit">
                                                 <i class="fa fa-search"></i>
@@ -43,6 +43,9 @@
                                         <th style="width: 5%">No</th>
                                         <th style="width: 200px">Aksi</th>
                                         <th style="width: auto">Title</th>
+                                        <th style="width: auto">Media</th>
+                                        <th style="width: auto">Bahasa</th>
+                                        <th style="width: auto">Jurnalis</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -58,7 +61,10 @@
                                                 hapus
                                             </a>
                                         </td>
-                                        <td>{{ getUrl }}</td>
+                                        <td>{{ getTitle }}</td>
+                                        <td>{{ media.name }}</td>
+                                        <td>{{ language.name }}</td>
+                                        <td>{{ journalist.name }}</td>
                                     </tr>
                                     <div class="modal fade" id="deleteModal{{ getId }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-xs">

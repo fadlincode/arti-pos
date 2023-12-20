@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Language } from "./language.entity";
-import { Repository } from "typeorm";
+import { Like, Repository } from "typeorm";
 
 @Injectable()
 export class LanguageService {
@@ -10,8 +10,13 @@ export class LanguageService {
         private languageRepository: Repository<Language>,
     ) {}
 
-    findAll(): Promise<Language[]> {
-        return this.languageRepository.find();
+    findAll(limit, searchTerm): Promise<Language[]> {
+        return this.languageRepository.find({
+            take: limit,
+            where: {
+                name: Like(`%${searchTerm}%`),
+            }
+        });
     }
 
     findOne(id: number): Promise<Language | null> {

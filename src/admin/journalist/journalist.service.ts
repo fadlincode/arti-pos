@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Journalist } from "./journalist.entity";
-import { Repository } from "typeorm";
+import { Like, Repository } from "typeorm";
 
 @Injectable()
 export class JournalistService {
@@ -10,8 +10,13 @@ export class JournalistService {
         private journalistRepository: Repository<Journalist>,
     ) {}
 
-    findAll(): Promise<Journalist[]> {
-        return this.journalistRepository.find();
+    findAll(limit: number, searchTerm: string): Promise<Journalist[]> {
+        return this.journalistRepository.find({
+            take: limit,
+            where: {
+                name: Like(`%${searchTerm}%`),
+            },
+        });
     }
 
     findOne(id: number): Promise<Journalist | null> {

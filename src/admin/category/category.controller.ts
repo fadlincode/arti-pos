@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Redirect, Render } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, Redirect, Render } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { Category } from './category.entity';
 
@@ -8,10 +8,17 @@ export class CategoryController {
 
     @Get('/')
     @Render('features/admin/category/index')
-    async index() {
+    async index(
+        @Query('limit') limit: number,
+        @Query('searchTerm') searchTerm: string
+    ) {
+        limit = limit || 10;
+        searchTerm = searchTerm || '';
+
         const data = {
             title: 'Category',
-            categories: await this.categoryService.findAll()
+            categories: await this.categoryService.findAll(limit, searchTerm),
+            searchTerm: searchTerm
         }
 
         return {
