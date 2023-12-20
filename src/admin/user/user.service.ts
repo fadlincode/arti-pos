@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { User } from './user.entity';
 
 
@@ -11,8 +11,13 @@ export class UserService {
         private userRepository: Repository<User>,
     ) {}
 
-    findAll(): Promise<User[]> {
-        return this.userRepository.find();
+    findAll(limit: number, searchTerm: string): Promise<User[]> {
+        return this.userRepository.find({
+            take: limit,
+            where: {
+                name: Like(`%${searchTerm}%`),
+            },
+        });
     }
 
     findOne(id: number): Promise<User | null> {
