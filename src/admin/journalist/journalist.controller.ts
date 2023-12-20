@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Redirect, Render, UploadedFile, UseInterceptors } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query, Redirect, Render, UploadedFile, UseInterceptors } from "@nestjs/common";
 import { JournalistService } from "./journalist.service";
 import { Journalist } from "./journalist.entity";
 import { FileInterceptor } from "@nestjs/platform-express";
@@ -11,10 +11,17 @@ export class JournalistController {
 
     @Get('/')
     @Render('features/admin/journalist/index')
-    async index() {
+    async index(
+        @Query('limit') limit: number,
+        @Query('searchTerm') searchTerm: string
+    ) {
+        limit = limit || 10;
+        searchTerm = searchTerm || '';
+
         const data = {
             title: 'Journalist',
-            journalists: await this.journalistService.findAll()
+            journalists: await this.journalistService.findAll(limit, searchTerm),
+            searchTerm: searchTerm
         }
 
         return {
