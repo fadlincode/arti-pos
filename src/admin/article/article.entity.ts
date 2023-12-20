@@ -20,19 +20,19 @@ export class Article {
     @Column({ nullable: true })
     title_eng?: string;
 
-    @Column({ nullable: true })
+    @Column({ nullable: true, type: 'text' })
     summary_original?: string;
 
-    @Column({ nullable: true })
+    @Column({ nullable: true, type: 'text' })
     summary_eng?: string;
 
-    @Column()
+    @Column({ type: 'text' })
     content: string;
 
-    @Column({ nullable: true })
+    @Column({ nullable: true, type: 'text' })
     openai_summary?: string;
 
-    @Column({ nullable: true })
+    @Column({ nullable: true, type: 'text' })
     image?: string;
 
     @Column({ type: 'date' })

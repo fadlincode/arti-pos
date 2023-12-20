@@ -9,11 +9,11 @@ export class Media {
     @Column()
     name: string;
 
-    @Column({ nullable: true })
-    logo?: string;
-
     @Column()
     url: string;
+
+    @Column({ nullable: true, type: 'longtext' })
+    logo?: string;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     created_at: Date
