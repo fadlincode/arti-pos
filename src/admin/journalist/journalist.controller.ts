@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post, Query, Redirect, Render, UploadedFi
 import { JournalistService } from "./journalist.service";
 import { Journalist } from "./journalist.entity";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { unlink } from "fs/promises";
+import { stat, unlink } from "fs/promises";
 import { join } from "path";
 
 @Controller('/admin/journalists')
@@ -70,8 +70,9 @@ export class JournalistController {
 
         journalist.setName(body.name);
         if (file) {
-            const filePath = join('./public/uploads/journalist/', journalist.photo);
-            if (filePath) {
+            const filePath = join('./public/uploads/journalist/', journalist.photo || '');
+            const fileCheck = await stat(filePath);
+            if (fileCheck.isFile()) {
                 await unlink(filePath);
             }
             
@@ -84,9 +85,10 @@ export class JournalistController {
     @Redirect('/admin/journalists')
     async remove(@Param('id') id: number) {
         const journalist = await this.journalistService.findOne(id);
-        const filePath = join('./public/uploads/journalist/', journalist.photo);
 
-        if (filePath) {
+        const filePath = join('./public/uploads/journalist/', journalist.photo || '');
+        const fileCheck = await stat(filePath);
+        if (fileCheck.isFile()) {
             await unlink(filePath);
         }
         
