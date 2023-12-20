@@ -11,7 +11,9 @@ export class ArticleService {
     ) {}
 
     findAll(): Promise<Article[]> {
-        return this.articleRepository.find();
+        return this.articleRepository.find({
+            relations: ['media','language','journalist']
+        });
     }
 
     findOne(id: number): Promise<Article | null> {

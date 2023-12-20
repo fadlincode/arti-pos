@@ -36,6 +36,10 @@ async function bootstrap() {
     }
   );
 
+  hbs.registerHelper("log", function(log) {
+    return console.log(log);
+  });
+
   await app.listen(3000);
 }
 bootstrap();

@@ -3,55 +3,63 @@ import { Article } from '../article/article.entity';
 
 @Entity({ name: 'medias' })
 export class Media {
-  @PrimaryGeneratedColumn()
-  id: number;
+    @PrimaryGeneratedColumn()
+    id: number;
 
-  @Column()
-  name: string;
+    @Column()
+    name: string;
 
-  @Column({ nullable: true })
-  logo?: string;
+    @Column({ nullable: true })
+    logo?: string;
 
-  @Column({ nullable: true })
-  url?: string;
+    @Column()
+    url: string;
 
-  getId(): number {
-    return this.id;
-  }
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    created_at: Date
 
-  getName(): string {
-    return this.name;
-  }
+    @Column({ nullable: true, type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    updated_at?: Date
 
-  getLogo(): string {
-    return this.logo;
-  }
+    @OneToMany(() => Article, (article) => article.media)
+    articles: Article[]
 
-  getUrl(): string {
-    return this.url;
-  }
+    getId(): number {
+        return this.id;
+    }
 
-  setName(name: string) {
-    this.name = name;
-  }
+    getName(): string {
+        return this.name;
+    }
 
-  setLogo(logo: string) {
-    this.logo = logo;
-  }
+    getLogo(): string {
+        return this.logo;
+    }
 
-  setUrl(url: string) {
-    this.url = url;
-  }
+    getUrl(): string {
+        return this.url;
+    }
 
-  getArticles(): Article[] {
-    return this.articles;
-  }
+    setName(name: string) {
+        this.name = name;
+    }
 
-  setArticles(articles: Article[]) {
-    this.articles = articles;
-  }
+    setLogo(logo: string) {
+        this.logo = logo;
+    }
 
-  @OneToMany(() => Article, (article) => article.media)
-  articles: Article[]
+    setUrl(url: string) {
+        this.url = url;
+    }
+
+    getArticles(): Article[] {
+        return this.articles;
+    }
+
+    setArticles(articles: Article[]) {
+        this.articles = articles;
+    }
+
+    
 
 }

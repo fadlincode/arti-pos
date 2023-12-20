@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Article } from "../article/article.entity";
 
 @Entity({ name: 'journalists' })
 export class Journalist {
@@ -10,6 +11,15 @@ export class Journalist {
 
     @Column({ nullable: true })
     photo?: string
+
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    created_at: Date
+
+    @Column({ nullable: true, type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    updated_at?: Date
+
+    @OneToMany(() => Article, article => article.journalist)
+    articles: Article[]
 
     getId(): number {
         return this.id;

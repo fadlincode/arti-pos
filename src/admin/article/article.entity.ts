@@ -1,5 +1,7 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Media } from '../media/media.entity';
+import { Language } from '../language/language.entity';
+import { Journalist } from '../journalist/journalist.entity';
 
 @Entity({ name: 'articles' })
 export class Article {
@@ -15,14 +17,53 @@ export class Article {
     @Column()
     title_original: string;
 
+    @Column({ nullable: true })
+    title_eng?: string;
+
+    @Column({ nullable: true })
+    summary_original?: string;
+
+    @Column({ nullable: true })
+    summary_eng?: string;
+
     @Column()
     content: string;
 
-    @Column()
-    image: string;
+    @Column({ nullable: true })
+    openai_summary?: string;
 
-    @Column()
-    date: string;
+    @Column({ nullable: true })
+    image?: string;
+
+    @Column({ type: 'date' })
+    date: Date;
+
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    created_at: Date
+
+    @Column({ nullable: true, type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    updated_at?: Date
+
+    @Column({ name:'media_id' })
+    mediaId: number
+
+    @Column({ name:'language_id' })
+    languageId: number
+
+    @Column({ name:'journalist_id' })
+    journalistId: number
+
+    @ManyToOne(() => Media)
+    @JoinColumn({ name: 'media_id' })
+    media: Media;
+
+    @ManyToOne(() => Language)
+    @JoinColumn({ name: 'language_id' })
+    language: Language;
+
+    @ManyToOne(() => Journalist)
+    @JoinColumn({ name: 'journalist_id' })
+    journalist: Journalist;
 
     getId(): number {
         return this.id;
@@ -40,27 +81,31 @@ export class Article {
         return this.title_original;
     }
 
+    getTitleEng(): string {
+        return this.title_eng;
+    }
+
+    getSummaryOriginal(): string {
+        return this.summary_original;
+    }
+
+    getSummaryEng(): string {
+        return this.summary_eng;
+    }
+
     getContent(): string {
         return this.content;
     }
 
-    getDate(): string {
-        return this.date;
+    getOpenAiSummary(): string {
+        return this.openai_summary;
     }
 
     getImage(): string {
         return this.image;
     }
 
-    getMedia(): Media {
-        return this.media;
+    getDate(): Date {
+        return this.date;
     }
-
-    setMedia(media: Media) {
-        return this.media = media;
-    }
-
-    @ManyToOne(() => Media, (media) => media.articles)
-    media: Media;
-  
 }
