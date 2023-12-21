@@ -37,7 +37,7 @@
                             <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2 updateLikeBtn" data-id="{{data.articles.trendings.[5].id}}">
                                 <i class="far fa-heart iconClass">
                                     {{#if data.articles.trendings.[5].like_count}}
-                                    <span class="label label-sm label-danger">{{data.articles.trendings.[5].like_count}}</span>
+                                    <span class="label label-sm label-danger likeCount" data-id="{{data.articles.trendings.[5].id}}">{{data.articles.trendings.[5].like_count}}</span>
                                     {{/if}}
                                 </i>
                             </a>
@@ -84,7 +84,7 @@
                                             <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2 updateLikeBtn" data-id="{{getId}}">
                                                 <i class="far fa-heart iconClass">
                                                     {{#if getLikeCount}}
-                                                    <span class="label label-sm label-danger">{{getLikeCount}}</span>
+                                                    <span class="label label-sm label-danger likeCount" data-id="{{getId}}">{{getLikeCount}}</span>
                                                     {{/if}}
                                                 </i>
                                             </a>
