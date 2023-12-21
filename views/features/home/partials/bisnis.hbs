@@ -21,7 +21,7 @@
 
 <div class="row mt-4">
     <div class="col-md-3">
-        <div class="card card-custom bgi-no-repeat bgi-no-repeat bgi-size-cover gutter-b" style="height: 680px; background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(218, 13, 13, 0.73)), url({{data.articles.trendings.[5].image}})">
+        <div class="card card-custom bgi-no-repeat bgi-no-repeat bgi-size-cover gutter-b" style="height: 680px; background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(218, 13, 13, 0.73)), url({{data.articles.trendings.[6].image}})">
             <div class="card-body d-flex flex-column ">
                 <div class="card-body d-flex">
                     <div class="d-flex py-20 flex-column align-items-start flex-grow-1">
@@ -38,7 +38,11 @@
                                 <i class="far fa-heart"></i>
                             </a>
                             <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                <i class="fas fa-share-alt"></i>
+                                <i class="far fa-eye iconClass">
+                                    {{#if data.articles.trendings.[6].view_count}}
+                                    <span class="label label-sm label-warning">{{data.articles.trendings.[6].view_count}}</span>
+                                    {{/if}}
+                                </i>
                             </a>
                         </div>
                     </div>
@@ -51,15 +55,15 @@
             <div class="row">
                 {{#each data.articles.trendings}}
                 <div class="col-md-4">
-                    <div class="card card-custom gutter-b">
+                    <div class="card card-custom gutter-b" style="height: 400px;">
                         <div class="card-body">
                             <div class="pt-4">
                                 <div class="bgi-no-repeat bgi-size-cover rounded min-h-125px" style="background-image: url({{getImage}})"></div>
                                 <p class="text-dark-75 font-size-lg font-weight-normal pt-5 mb-2">
-                                    Intip Keseruan JNFI 2023 di Pulau Bokori, 250 Fotografer se-Indonesia Beradu Skill 
+                                    {{getTitle}}
                                 </p>
                                 <p class="text-dark-50 mt-2">
-                                    <i class="far fa-user-circle text-warning"></i> AuthorsName
+                                    <i class="far fa-user-circle text-warning"></i> <b>[{{media.name}}]</b> - {{journalist.name}}
                                 </p>
 
                                 <div class="align-items-center">
@@ -67,7 +71,11 @@
                                         <i class="far fa-heart"></i>
                                     </a>
                                     <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                        <i class="fas fa-share-alt"></i>
+                                        <i class="far fa-eye iconClass">
+                                            {{#if getViewCount}}
+                                            <span class="label label-sm label-warning">{{getViewCount}}</span>
+                                            {{/if}}
+                                        </i>
                                     </a>
                                 </div>
                             </div>

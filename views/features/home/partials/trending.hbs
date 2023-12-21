@@ -19,7 +19,11 @@
                                         <i class="far fa-heart"></i>
                                     </a>
                                     <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                        <i class="fas fa-share-alt"></i>
+                                        <i class="far fa-eye iconClass">
+                                            {{#if data.articles.trendings.[0].view_count}}
+                                            <span class="label label-sm label-warning">{{data.articles.trendings.[0].view_count}}</span>
+                                            {{/if}}
+                                        </i>  
                                     </a>
                                 </div>
                             </div>
@@ -47,7 +51,11 @@
                                         <i class="far fa-heart"></i>
                                     </a>
                                     <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                        <i class="fas fa-share-alt"></i>
+                                        <i class="far fa-eye iconClass">
+                                            {{#if data.articles.trendings.[1].view_count}}
+                                            <span class="label label-sm label-warning">{{data.articles.trendings.[1].view_count}}</span>
+                                            {{/if}}
+                                        </i>
                                     </a>
                                 </div>
                             </div>
@@ -73,7 +81,11 @@
                                         <i class="far fa-heart"></i>
                                     </a>
                                     <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                        <i class="fas fa-share-alt"></i>
+                                        <i class="far fa-eye iconClass">
+                                            {{#if data.articles.trendings.[2].view_count}}
+                                            <span class="label label-sm label-warning">{{data.articles.trendings.[2].view_count}}</span>
+                                            {{/if}}
+                                        </i>
                                     </a>
                                 </div>
                             </div>
@@ -119,7 +131,11 @@
                                                 <i class="far fa-heart "></i>
                                             </a>
                                             <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                                <i class="fas fa-share-alt"></i>
+                                                <i class="far fa-eye iconClass">
+                                                    {{#if getViewCount}}
+                                                    <span class="label label-sm label-warning">{{getViewCount}}</span>
+                                                    {{/if}}
+                                                </i>
                                             </a>
                                         </div>
                                     </div>
