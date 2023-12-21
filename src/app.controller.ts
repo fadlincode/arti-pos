@@ -28,6 +28,9 @@ export class AppController {
   @Get('/read/:slug')
   @Render('features/home/detail')
   async detail(@Param('slug') slug: string) {
+
+    await this.articleService.updateViewCount(slug);
+
     const data = {
       title: 'Detail Berita',
       article: await this.articleService.findBySlug(slug),

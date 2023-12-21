@@ -45,4 +45,10 @@ export class ArticleService {
     async remove(id: number): Promise<void> {
         await this.articleRepository.delete(id);
     }
+
+    async updateViewCount(slug: string): Promise<void> {
+        const article = await this.findBySlug(slug);
+        article[0].view_count++;
+        await this.articleRepository.save(article);
+    }
 }
