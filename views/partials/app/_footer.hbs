@@ -93,6 +93,26 @@
         <script type="text/javascript" src="/assets/plugins/custom/slick/slick.min.js"></script>
         <script>
             $(document).ready(function() {
+                $('.updateLikeBtn').click(function() {
+                    var article = parseInt($(this).data('id'));
+
+                    $.ajax({
+                        type: 'POST',
+                        data: {id: article},
+                        url: '/updatelikes',
+                        success: function(response) {
+                            console.log(response.article.like_count);
+                            $('[data-id="' + article + '"].likeCount').text(response.article.like_count);
+                        },
+                        error: function(error) {
+                            console.error('Error updating likes:', error);
+                        }
+                    });
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
                 $('.multiple-items').slick({
                     dots: true,
                     infinite: true,

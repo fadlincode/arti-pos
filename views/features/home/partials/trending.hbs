@@ -15,8 +15,12 @@
                                     </p>
                                 </div>
                                 <div class="align-items-center">
-                                    <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                        <i class="far fa-heart"></i>
+                                    <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2 updateLikeBtn" data-id="{{data.articles.trendings.[0].id}}">
+                                        <i class="far fa-heart iconClass">
+                                            {{#if data.articles.trendings.[0].like_count}}
+                                            <span class="label label-sm label-danger likeCount" data-id="{{data.articles.trendings.[0].id}}">{{data.articles.trendings.[0].like_count}}</span>
+                                            {{/if}}
+                                        </i>
                                     </a>
                                     <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
                                         <i class="far fa-eye iconClass">
@@ -47,8 +51,12 @@
                                     </p>
                                 </div>
                                 <div class="align-items-center">
-                                    <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                        <i class="far fa-heart"></i>
+                                    <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2 updateLikeBtn" data-id="{{data.articles.trendings.[1].id}}">
+                                        <i class="far fa-heart iconClass">
+                                            {{#if data.articles.trendings.[1].like_count}}
+                                            <span class="label label-sm label-danger likeCount" data-id="{{data.articles.trendings.[1].id}}">{{data.articles.trendings.[1].like_count}}</span>
+                                            {{/if}}
+                                        </i>
                                     </a>
                                     <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
                                         <i class="far fa-eye iconClass">
@@ -73,12 +81,16 @@
                                         {{data.articles.trendings.[2].title_original}}
                                     </a>
                                     <p class="text-white mt-2">
-                                        <i class="far fa-user-circle text-warning"></i> [{{data.articles.trendings.[1].media.name}}] - {{data.articles.trendings.[1].journalist.name}}
+                                        <i class="far fa-user-circle text-warning"></i> [{{data.articles.trendings.[2].media.name}}] - {{data.articles.trendings.[2].journalist.name}}
                                     </p>
                                 </div>
                                 <div class="align-items-center">
-                                    <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                        <i class="far fa-heart"></i>
+                                    <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2 updateLikeBtn" data-id="{{data.articles.trendings.[2].id}}">
+                                        <i class="far fa-heart iconClass">
+                                            {{#if data.articles.trendings.[2].like_count}}
+                                            <span class="label label-sm label-danger likeCount" data-id="{{data.articles.trendings.[2].id}}">{{data.articles.trendings.[2].like_count}}</span>
+                                            {{/if}}
+                                        </i>
                                     </a>
                                     <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
                                         <i class="far fa-eye iconClass">
@@ -127,8 +139,12 @@
                                             <i class="far fa-user-circle text-warning"></i> <b>[{{media.name}}]</b> - {{journalist.name}}
                                         </p>
                                         <div class="align-items-center">
-                                            <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                                <i class="far fa-heart "></i>
+                                            <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2 updateLikeBtn" data-id="{{getId}}">
+                                                <i class="far fa-heart iconClass">
+                                                    {{#if getLikeCount}}
+                                                    <span class="label label-sm label-danger likeCount" data-id="{{getId}}">{{getLikeCount}}</span>
+                                                    {{/if}}
+                                                </i>
                                             </a>
                                             <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
                                                 <i class="far fa-eye iconClass">

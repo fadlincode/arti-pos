@@ -52,8 +52,12 @@
                                             <i class="far fa-user-circle text-warning"></i> <b>[{{media.name}}]</b> - {{journalist.name}}
                                         </p>
                                         <div class="align-items-center">
-                                            <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                                <i class="far fa-heart "></i>
+                                            <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2 updateLikeBtn" data-id="{{getId}}">
+                                                <i class="far fa-heart iconClass">
+                                                    {{#if getLikeCount}}
+                                                    <span class="label label-sm label-danger likeCount" data-id="{{getId}}">{{getLikeCount}}</span>
+                                                    {{/if}}
+                                                </i>
                                             </a>
                                             <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
                                                 <i class="far fa-eye iconClass">
@@ -109,8 +113,12 @@
                                             <i class="far fa-user-circle text-warning"></i> <b>[{{media.name}}]</b> - {{journalist.name}}
                                         </p>
                                         <div class="align-items-center">
-                                            <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                                <i class="far fa-heart "></i>
+                                            <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2 updateLikeBtn" data-id="{{getId}}">
+                                                <i class="far fa-heart iconClass">
+                                                    {{#if getLikeCount}}
+                                                    <span class="label label-sm label-danger likeCount" data-id="{{getId}}">{{getLikeCount}}</span>
+                                                    {{/if}}
+                                                </i>
                                             </a>
                                             <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
                                                 <i class="far fa-eye iconClass">
@@ -165,8 +173,12 @@
                                             <i class="far fa-user-circle text-warning"></i> <b>[{{media.name}}]</b> - {{journalist.name}}
                                         </p>
                                         <div class="align-items-center">
-                                            <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                                <i class="far fa-heart "></i>
+                                            <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2 updateLikeBtn" data-id="{{getId}}">
+                                                <i class="far fa-heart iconClass">
+                                                    {{#if getLikeCount}}
+                                                    <span class="label label-sm label-danger likeCount" data-id="{{getId}}">{{getLikeCount}}</span>
+                                                    {{/if}}
+                                                </i>
                                             </a>
                                             <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
                                                 <i class="far fa-eye iconClass">

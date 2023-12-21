@@ -41,6 +41,9 @@ export class Article {
     @Column()
     view_count: number;
 
+    @Column()
+    like_count: number;
+
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     created_at: Date
 
@@ -118,5 +121,13 @@ export class Article {
 
     setViewCount(view_count: number) {
         this.view_count = view_count;
+    }
+
+    getLikeCount(): number {
+        return this.like_count;
+    }
+
+    setLikeCount(like_count: number) {
+        this.like_count = like_count;
     }
 }
