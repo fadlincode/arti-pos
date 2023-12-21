@@ -24,6 +24,16 @@ export class ArticleService {
         return this.articleRepository.findOneBy({ id });
     }
 
+    findBySlug(slug: string): Promise<Article[]> {
+        return this.articleRepository.find({
+            take: 1,
+            where: {
+                slug: Like(`%${slug}%`),
+            },
+            relations: ['media','language','journalist']
+        });
+    }
+
     findCount(): Promise<number> {
         return this.articleRepository.count();
     }

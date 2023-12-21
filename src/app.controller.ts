@@ -25,15 +25,19 @@ export class AppController {
     };
   }
 
-  @Get('/berita/:slug')
-  detail(@Param() params, @Res() response) {
+  @Get('/read/:slug')
+  @Render('features/home/detail')
+  async detail(@Param('slug') slug: string) {
+
     const data = {
       title: 'Detail Berita',
+      article: await this.articleService.findBySlug(slug),
+      trendings: await this.articleService.findAll(9, ''),
     };
 
-    return response.render('features/home/detail', {
+    return {
       data: data
-    })
+    }
     
   }
 }

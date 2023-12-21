@@ -1,26 +1,28 @@
 {{#> app}}
     {{#*inline "content"}}
-    
+        
         <div class="d-flex flex-column-fluid">
             <div class="container ">
                 <div class="row">
+                    {{#each data.article}}
                     <div class="col-md-8">
                         <div class="card card-custom gutter-b">
                             <div class="card-body">
+                                <a class="btn btn-outline-success btn-icon" href="/" title="Refresh">
+                                    <i class="fas fa-arrow-left"></i>
+                                </a>
+                                <div class="separator separator-solid mt-2 mb-4"></div>
                                 <div class="d-flex align-items-center">
                                     <div class="symbol symbol-40 symbol-light-danger mr-5">
                                         <span class="symbol-label"></span>
                                     </div>
 
                                     <div class="d-flex flex-column flex-grow-1">
-                                        <a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">AuthorsName</a>
-                                        <span class="text-muted font-weight-bold">11 Agustus 2023 11:22 WIB</span>
+                                        <a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder"><b>[{{media.name}}] - {{journalist.name}}</b></a>
+                                        <span class="text-muted font-weight-bold">{{getDate}}</span>
                                     </div>
                                     
                                     <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="" data-placement="left" data-original-title="Quick actions">
-                                        <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                            <i class="fas fa-share-alt"></i>
-                                        </a>
                                         <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
                                             <i class="far fa-eye"></i> 225
                                         </a>
@@ -30,47 +32,33 @@
                                 
                                 <div class="pt-4">
                                     <p class="text-dark-75 text-hover-primary font-weight-boldest font-size-h1 mb-1">
-                                        Selain Rokok Ilegal, Bea Cukai Kendari Juga Musnahkan Miras Ilegal Hasil Sitaan 
+                                        {{getTitle}} 
                                     </p>
 
-                                    <div class="bgi-no-repeat bgi-size-cover rounded min-h-500px" style="background-image: url(/assets/media/stock-900x600/3.jpg)"></div>
+                                    <div class="bgi-no-repeat bgi-size-cover rounded min-h-500px" style="background-image: url({{getImage}})"></div>
                                     
                                     <p class="text-dark-75 font-size-lg font-weight-normal pt-5 mb-2">
-                                        Pemusnahan BMMN tersebut berupa Minuman Mengandung Etil Alkohol (MMEA)/minuman keras ilegal sebanyak 47 liter dengan perkiraan nilai barang sebesar Rp10.019.000. Pemusnahan dilaksanakan di TPA Puuwatu, Kendari, Sulawesi Tenggara (Sultra), Kamis (14/12/2023).
-                                        Kepala KPPBC TMP C Kendari, Tonny Riduan P. Simorangkir mengatakan, pada periode 2022 pihaknya melakukan 9 penindakan terhadap miras ilegal.
-                                        “Potensi kerugian negara dari hasil sitaan miras ilegal tersebut yakni sebesar Rp3.575.700,” katanya.
-                                        Pemusnahan BMMN ini dilaksanakan sesuai dengan ketentuan Peraturan Menteri Keuangan Republik Indonesia Nomor 83/PMK.06/2016 tentang Tata Cara Pelaksanaan Pemusnahan dan Penghapusan Barang Milik Negara.
-                                    </p>
-                                    <p class="text-dark-75 font-size-lg font-weight-normal pt-5 mb-2">
-                                        Pemusnahan BMMN tersebut berupa Minuman Mengandung Etil Alkohol (MMEA)/minuman keras ilegal sebanyak 47 liter dengan perkiraan nilai barang sebesar Rp10.019.000. Pemusnahan dilaksanakan di TPA Puuwatu, Kendari, Sulawesi Tenggara (Sultra), Kamis (14/12/2023).
-                                        Kepala KPPBC TMP C Kendari, Tonny Riduan P. Simorangkir mengatakan, pada periode 2022 pihaknya melakukan 9 penindakan terhadap miras ilegal.
-                                        “Potensi kerugian negara dari hasil sitaan miras ilegal tersebut yakni sebesar Rp3.575.700,” katanya.
-                                        Pemusnahan BMMN ini dilaksanakan sesuai dengan ketentuan Peraturan Menteri Keuangan Republik Indonesia Nomor 83/PMK.06/2016 tentang Tata Cara Pelaksanaan Pemusnahan dan Penghapusan Barang Milik Negara.
-                                    </p>
-                                    <p class="text-dark-75 font-size-lg font-weight-normal pt-5 mb-2">
-                                        Pemusnahan BMMN tersebut berupa Minuman Mengandung Etil Alkohol (MMEA)/minuman keras ilegal sebanyak 47 liter dengan perkiraan nilai barang sebesar Rp10.019.000. Pemusnahan dilaksanakan di TPA Puuwatu, Kendari, Sulawesi Tenggara (Sultra), Kamis (14/12/2023).
-                                        Kepala KPPBC TMP C Kendari, Tonny Riduan P. Simorangkir mengatakan, pada periode 2022 pihaknya melakukan 9 penindakan terhadap miras ilegal.
-                                        “Potensi kerugian negara dari hasil sitaan miras ilegal tersebut yakni sebesar Rp3.575.700,” katanya.
-                                        Pemusnahan BMMN ini dilaksanakan sesuai dengan ketentuan Peraturan Menteri Keuangan Republik Indonesia Nomor 83/PMK.06/2016 tentang Tata Cara Pelaksanaan Pemusnahan dan Penghapusan Barang Milik Negara.
+                                        {{getContent}}
                                     </p>
                                 </div>
                                 
                                 <div class="separator separator-solid mt-2 mb-4"></div>
-
-                                <form class="position-relative">
-                                    <textarea id="kt_forms_widget_4_input" class="form-control border-0 p-0 pr-10 resize-none" rows="1" placeholder="Reply..." style="overflow: hidden; overflow-wrap: break-word; height: 20px;"></textarea>
-                                    <div class="position-absolute top-0 right-0 mt-n1 mr-n2">
-                                        <span class="btn btn-icon btn-sm btn-hover-icon-primary">
-                                        <i class="flaticon2-clip-symbol icon-ms"></i>
-                                        </span>
-                                        <span class="btn btn-icon btn-sm btn-hover-icon-primary">
-                                        <i class="flaticon2-pin icon-ms"></i>
-                                        </span>
-                                    </div>
-                                </form>
+                                <b class="text-danger">Share ke Social Media :</b>
+                                <!-- AddToAny BEGIN -->
+                                <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                                    <a class="a2a_button_facebook"></a>
+                                    <a class="a2a_button_whatsapp"></a>
+                                    <a class="a2a_button_telegram"></a>
+                                    <a class="a2a_button_x"></a>
+                                </div>
+                                <script async src="https://static.addtoany.com/menu/page.js"></script>
+                                <!-- AddToAny END -->
+                                
                             </div>
                         </div>
                     </div>
+                    {{/each}}
+                    
                     <div class="col-md-4">
                         {{!-- Trending --}}
                         <div class="card card-custom gutter-b">
@@ -90,16 +78,17 @@
                                     <div class="tab-content mt-5" id="myTabLIist18">
                                         <div class="tab-pane fade show active" id="kt_tab_pane_news_month" role="tabpanel" aria-labelledby="kt_tab_pane_news_month">
                                             <div class="form">
+                                                {{#each data.trendings}}
                                                 <div class="d-flex align-items-top pb-9">
                                                     <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                                        <div class="symbol-label" style="background-image: url('/assets/media/stock-600x400/img-20.jpg')"></div>
+                                                        <div class="symbol-label" style="background-image: url('{{getImage}}')"></div>
                                                     </div>
                                                     <div class="d-flex flex-column flex-grow-1">
-                                                        <a href="#" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
-                                                            Developer Sultra Terima Penghargaan Silver Winner Rumah Subsidi dari FIABCI-REI
+                                                        <a href="/read/{{getSlug}}" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
+                                                            {{getTitle}}
                                                         </a>
                                                         <p class="mt-2 text-dark-75 font-size-sm">
-                                                            <i class="far fa-user-circle text-warning"></i> AuthorsName
+                                                            <i class="far fa-user-circle text-warning"></i> <b>[{{media.name}}]</b> - {{journalist.name}}
                                                         </p>
                                                         <div class="align-items-center">
                                                             <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
@@ -112,74 +101,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="separator separator-solid mb-4"></div>
+                                                {{/each}}
+
                                                 <div class="d-flex align-items-top pb-9">
-                                                    <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                                        <div class="symbol-label" style="background-image: url('/assets/media/stock-600x400/img-19.jpg')"></div>
-                                                    </div>
-                                                    <div class="d-flex flex-column flex-grow-1">
-                                                        <a href="#" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
-                                                            Developer Sultra Terima Penghargaan Silver Winner Rumah Subsidi dari FIABCI-REI
-                                                        </a>
-                                                        <p class="mt-2 text-dark-75 font-size-sm">
-                                                            <i class="far fa-user-circle text-warning"></i> AuthorsName
-                                                        </p>
-                                                        <div class="align-items-center">
-                                                            <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                                                <i class="far fa-heart "></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                                                <i class="fas fa-share-alt"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="separator separator-solid mb-4"></div>
-                                                <div class="d-flex align-items-top pb-9">
-                                                    <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                                        <div class="symbol-label" style="background-image: url('/assets/media/stock-600x400/img-24.jpg')"></div>
-                                                    </div>
-                                                    <div class="d-flex flex-column flex-grow-1">
-                                                        <a href="#" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
-                                                            Developer Sultra Terima Penghargaan Silver Winner Rumah Subsidi dari FIABCI-REI
-                                                        </a>
-                                                        <p class="mt-2 text-dark-75 font-size-sm">
-                                                            <i class="far fa-user-circle text-warning"></i> AuthorsName
-                                                        </p>
-                                                        <div class="align-items-center">
-                                                            <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                                                <i class="far fa-heart "></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                                                <i class="fas fa-share-alt"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="separator separator-solid mb-4"></div>
-                                                <div class="d-flex align-items-top pb-9">
-                                                    <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                                        <div class="symbol-label" style="background-image: url('/assets/media/stock-600x400/img-21.jpg')"></div>
-                                                    </div>
-                                                    <div class="d-flex flex-column flex-grow-1">
-                                                        <a href="#" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
-                                                            Developer Sultra Terima Penghargaan Silver Winner Rumah Subsidi dari FIABCI-REI
-                                                        </a>
-                                                        <p class="mt-2 text-dark-75 font-size-sm">
-                                                            <i class="far fa-user-circle text-warning"></i> AuthorsName
-                                                        </p>
-                                                        <div class="align-items-center">
-                                                            <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                                                <i class="far fa-heart "></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                                                <i class="fas fa-share-alt"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="separator separator-solid mb-4"></div>
-                                                <div class="d-flex align-items-top pb-9">
-                                                    <button class="btn btn-primary btn-block"> Lainnya</button>
+                                                    <a href="/page/trendings" class="btn btn-primary btn-block"> Lainnya</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -189,11 +114,8 @@
                         </div>
                     </div>
                 </div>
-                    
-
-                
             </div>
         </div>
-
+        
     {{/inline}}
 {{/app}}
