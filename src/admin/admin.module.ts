@@ -6,6 +6,7 @@ import { JournalistController } from "./journalist/journalist.controller";
 import { CategoryController } from "./category/category.controller";
 import { UserController } from "./user/user.controller";
 import { ArticleController } from "./article/article.controller";
+import { SettingController } from "./setting/setting.controller";
 
 @Module({
     controllers: [
@@ -15,7 +16,8 @@ import { ArticleController } from "./article/article.controller";
         JournalistController,
         CategoryController,
         UserController,
-        ArticleController
+        ArticleController,
+        SettingController
     ]
 })
 export class AdminModule {}

@@ -38,6 +38,9 @@ export class Article {
     @Column({ type: 'date' })
     date: Date;
 
+    @Column()
+    view_count: number;
+
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     created_at: Date
 
@@ -107,5 +110,13 @@ export class Article {
 
     getDate(): Date {
         return this.date;
+    }
+
+    getViewCount(): number {
+        return this.view_count;
+    }
+
+    setViewCount(view_count: number) {
+        this.view_count = view_count;
     }
 }

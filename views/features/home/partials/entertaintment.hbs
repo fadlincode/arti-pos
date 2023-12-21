@@ -13,7 +13,7 @@
                 </h1>
             </div>
             <div class="d-flex flex-column flex-grow-1 align-items-end">
-                <a href="" class="font-weight-boldest font-size-h5">Lihat lainnya <i class="fas fa-arrow-circle-right "></i></a>
+                <a href="/page/entertainment" class="font-weight-boldest font-size-h5">Lihat lainnya <i class="fas fa-arrow-circle-right "></i></a>
             </div>
         </div>
     </div>
@@ -21,16 +21,16 @@
 
 <div class="row mt-4">
     <div class="col-md-3">
-        <div class="card card-custom bgi-no-repeat bgi-no-repeat bgi-size-cover gutter-b" style="height: 665px; background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(0, 0, 0, 0.73)), url(/assets/media/bg/bg-9.jpg)">
+        <div class="card card-custom bgi-no-repeat bgi-no-repeat bgi-size-cover gutter-b" style="height: 680px; background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.52), rgba(26, 194, 62, 0.73)), url({{data.articles.trendings.[5].image}})">
             <div class="card-body d-flex flex-column ">
                 <div class="card-body d-flex">
                     <div class="d-flex py-20 flex-column align-items-start flex-grow-1">
                         <div class="flex-grow-1">
-                            <a href="#" class="text-white font-weight-bolder font-size-h3">
-                                Abdikan Diri untuk Daerah, Anak Kampung di Pesisir Konsel Siap Menuju ke Senayan
+                            <a href="/read/{{data.articles.trendings.[5].slug}}" class="text-white font-weight-bolder font-size-h3">
+                                {{data.articles.trendings.[5].title_original}}
                             </a>
                             <p class="text-white mt-2">
-                                <i class="far fa-user-circle text-warning"></i> AuthorsName
+                                <i class="far fa-user-circle text-warning"></i> [{{data.articles.trendings.[5].media.name}}] - {{data.articles.trendings.[5].journalist.name}}
                             </p>
                         </div>
                         <div class="align-items-center">
@@ -38,7 +38,11 @@
                                 <i class="far fa-heart"></i>
                             </a>
                             <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                <i class="fas fa-share-alt"></i>
+                                <i class="far fa-eye iconClass"></i>
+                                    {{#if data.articles.trendings.[5].view_count}}
+                                    <span class="label label-sm label-warning">{{data.articles.trendings.[5].view_count}}</span>
+                                    {{/if}}
+                                </i>
                             </a>
                         </div>
                     </div>
@@ -48,106 +52,46 @@
     </div>
     <div class="col-md-9">
         <div class="card card-custom gutter-b">
-            <div class="card-header border-0 pt-7">
-                <h3 class="text-dark-75 text-hover-primary font-weight-boldest font-size-h3 mb-1">
-                    Terbaru
-                </h3>
-            </div>
+            <div style="height: 680px; overflow-y: auto;">
+                <div class="card-header border-0 pt-7">
+                    <h3 class="text-dark-75 text-hover-primary font-weight-boldest font-size-h3 mb-1">
+                        Terbaru
+                    </h3>
+                </div>
 
-            <div class="card-body pt-1">
-                <div class="tab-content mt-5" id="myTabLIist18">
-                    <div class="tab-pane fade show active" id="kt_tab_pane_news_month" role="tabpanel" aria-labelledby="kt_tab_pane_news_month">
-                        <div class="form">
-                            <div class="d-flex align-items-top pb-9">
-                                <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                    <div class="symbol-label" style="background-image: url('/assets/media/stock-600x400/img-20.jpg')"></div>
-                                </div>
+                <div class="card-body pt-1">
+                    <div class="tab-content mt-5" id="myTabLIist18">
+                        <div class="tab-pane fade show active" id="kt_tab_pane_news_month" role="tabpanel" aria-labelledby="kt_tab_pane_news_month">
+                            <div class="form">
+                                {{#each data.articles.trendings}}
+                                <div class="d-flex align-items-top pb-9">
+                                    <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
+                                        <div class="symbol-label" style="background-image: url('{{getImage}}')"></div>
+                                    </div>
 
-                                <div class="d-flex flex-column flex-grow-1">
-                                    <a href="#" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
-                                        Developer Sultra Terima Penghargaan Silver Winner Rumah Subsidi dari FIABCI-REI
-                                    </a>
-                                    <p class="mt-2 text-dark-75 font-size-sm">
-                                        <i class="far fa-user-circle text-warning"></i> AuthorsName
-                                    </p>
-                                    <div class="align-items-center">
-                                        <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                            <i class="far fa-heart "></i>
+                                    <div class="d-flex flex-column flex-grow-1">
+                                        <a href="/read/{{getSlug}}" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
+                                            {{getTitle}}
                                         </a>
-                                        <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                            <i class="fas fa-share-alt"></i>
-                                        </a>
+                                        <p class="mt-2 text-dark-75 font-size-sm">
+                                            <i class="far fa-user-circle text-warning"></i> <b>[{{media.name}}]</b> - {{journalist.name}}
+                                        </p>
+                                        <div class="align-items-center">
+                                            <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
+                                                <i class="far fa-heart "></i>
+                                            </a>
+                                            <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
+                                                <i class="far fa-eye iconClass">
+                                                    {{#if getViewCount}}
+                                                    <span class="label label-sm label-warning">{{getViewCount}}</span>
+                                                    {{/if}}
+                                                </i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="separator separator-solid mb-4"></div>
-                            <div class="d-flex align-items-top pb-9">
-                                <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                    <div class="symbol-label" style="background-image: url('/assets/media/stock-600x400/img-19.jpg')"></div>
-                                </div>
-
-                                <div class="d-flex flex-column flex-grow-1">
-                                    <a href="#" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
-                                        Developer Sultra Terima Penghargaan Silver Winner Rumah Subsidi dari FIABCI-REI
-                                    </a>
-                                    <p class="mt-2 text-dark-75 font-size-sm">
-                                        <i class="far fa-user-circle text-warning"></i> AuthorsName
-                                    </p>
-                                    <div class="align-items-center">
-                                        <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                            <i class="far fa-heart "></i>
-                                        </a>
-                                        <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                            <i class="fas fa-share-alt"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="separator separator-solid mb-4"></div>
-                            <div class="d-flex align-items-top pb-9">
-                                <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                    <div class="symbol-label" style="background-image: url('/assets/media/stock-600x400/img-24.jpg')"></div>
-                                </div>
-
-                                <div class="d-flex flex-column flex-grow-1">
-                                    <a href="#" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
-                                        Developer Sultra Terima Penghargaan Silver Winner Rumah Subsidi dari FIABCI-REI
-                                    </a>
-                                    <p class="mt-2 text-dark-75 font-size-sm">
-                                        <i class="far fa-user-circle text-warning"></i> AuthorsName
-                                    </p>
-                                    <div class="align-items-center">
-                                        <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                            <i class="far fa-heart "></i>
-                                        </a>
-                                        <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                            <i class="fas fa-share-alt"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="separator separator-solid mb-4"></div>
-                            <div class="d-flex align-items-top pb-9">
-                                <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                    <div class="symbol-label" style="background-image: url('/assets/media/stock-600x400/img-21.jpg')"></div>
-                                </div>
-
-                                <div class="d-flex flex-column flex-grow-1">
-                                    <a href="#" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
-                                        Developer Sultra Terima Penghargaan Silver Winner Rumah Subsidi dari FIABCI-REI
-                                    </a>
-                                    <p class="mt-2 text-dark-75 font-size-sm">
-                                        <i class="far fa-user-circle text-warning"></i> AuthorsName
-                                    </p>
-                                    <div class="align-items-center">
-                                        <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                            <i class="far fa-heart "></i>
-                                        </a>
-                                        <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                            <i class="fas fa-share-alt"></i>
-                                        </a>
-                                    </div>
-                                </div>
+                                <div class="separator separator-solid mb-4"></div>
+                                {{/each}}
                             </div>
                         </div>
                     </div>

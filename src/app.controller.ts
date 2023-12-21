@@ -1,16 +1,23 @@
 import { Controller, Get, Param, Render, Res } from '@nestjs/common';
 import { AppService } from './app.service';
+import { ArticleService } from './admin/article/article.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly articleService: ArticleService
+  ) {}
 
   @Get('/')
   @Render('features/home/index')
-  index() {
+  async index() {
     const data = {
       title: 'Index',
       content: 'This is content',
+      articles: {
+        trendings: await this.articleService.findAll(9, ''),
+      }
     };
 
     return {
@@ -18,15 +25,33 @@ export class AppController {
     };
   }
 
-  @Get('/berita/:slug')
-  detail(@Param() params, @Res() response) {
+  @Get('/read/:slug')
+  @Render('features/home/detail')
+  async detail(@Param('slug') slug: string) {
+
+    await this.articleService.updateViewCount(slug);
+
     const data = {
       title: 'Detail Berita',
+      article: await this.articleService.findBySlug(slug),
+      trendings: await this.articleService.findAll(9, ''),
     };
 
-    return response.render('features/home/detail', {
+    return {
       data: data
-    })
-    
+    }
+  }
+
+  @Get('/page/:category')
+  @Render('features/home/page')
+  async page(@Param('category') category: string) {
+    const data = {
+      title: category.toUpperCase(),
+      articles: await this.articleService.findAll(9, '')
+    };
+
+    return {
+      data: data
+    }
   }
 }

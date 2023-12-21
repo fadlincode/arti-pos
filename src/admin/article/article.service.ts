@@ -24,6 +24,16 @@ export class ArticleService {
         return this.articleRepository.findOneBy({ id });
     }
 
+    findBySlug(slug: string): Promise<Article[]> {
+        return this.articleRepository.find({
+            take: 1,
+            where: {
+                slug: Like(`%${slug}%`),
+            },
+            relations: ['media','language','journalist']
+        });
+    }
+
     findCount(): Promise<number> {
         return this.articleRepository.count();
     }
@@ -34,5 +44,11 @@ export class ArticleService {
 
     async remove(id: number): Promise<void> {
         await this.articleRepository.delete(id);
+    }
+
+    async updateViewCount(slug: string): Promise<void> {
+        const article = await this.findBySlug(slug);
+        article[0].view_count++;
+        await this.articleRepository.save(article);
     }
 }
