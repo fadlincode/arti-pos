@@ -28,7 +28,6 @@ export class AppController {
   @Get('/read/:slug')
   @Render('features/home/detail')
   async detail(@Param('slug') slug: string) {
-
     const data = {
       title: 'Detail Berita',
       article: await this.articleService.findBySlug(slug),
@@ -38,6 +37,18 @@ export class AppController {
     return {
       data: data
     }
-    
+  }
+
+  @Get('/page/:category')
+  @Render('features/home/page')
+  async page(@Param('category') category: string) {
+    const data = {
+      title: category.toUpperCase(),
+      articles: await this.articleService.findAll(9, '')
+    };
+
+    return {
+      data: data
+    }
   }
 }
