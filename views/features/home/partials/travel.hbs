@@ -13,7 +13,7 @@
                 </h1>
             </div>
             <div class="d-flex flex-column flex-grow-1 align-items-end">
-                <a href="" class="text-dark-50 font-weight-boldest font-size-h5">Lihat lainnya <i class="fas fa-arrow-circle-right "></i></a>
+                <a href="/read/travel" class="text-dark-50 font-weight-boldest font-size-h5">Lihat lainnya <i class="fas fa-arrow-circle-right "></i></a>
             </div>
         </div>
     </div>
@@ -22,16 +22,17 @@
 <div class="row mt-4">
     <div class="col-md-12">
         <div class="row">
+            {{#each data.articles.trendings}}
             <div class="col-md-4">
-                <div class="card card-custom gutter-b">
+                <div class="card card-custom gutter-b" style="height: 280px;">
                     <div class="card-body">
                         <div class="d-flex align-items-top pb-1">
                             <div class="d-flex flex-column flex-grow-1">
-                                <a href="#" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
-                                    Developer Sultra Terima Penghargaan Silver Winner Rumah Subsidi dari FIABCI-REI
+                                <a href="/read/{{getSlug}}" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
+                                    {{getTitle}}
                                 </a>
                                 <p class="mt-2 text-dark-75 font-size-sm">
-                                    <i class="far fa-user-circle text-warning"></i> AuthorsName
+                                    <i class="far fa-user-circle text-warning"></i> <b>[{{media.name}}]</b> - {{journalist.name}}
                                 </p>
                                 <div class="align-items-center">
                                     <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
@@ -43,147 +44,14 @@
                                 </div>
                             </div>
                             <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                <div class="symbol-label" style="background-image: url('/assets/media/stock-600x400/img-6.jpg')"></div>
+                                <div class="symbol-label" style="background-image: url('{{getImage}}')"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card card-custom gutter-b">
-                    <div class="card-body">
-                        <div class="d-flex align-items-top pb-1">
-                            <div class="d-flex flex-column flex-grow-1">
-                                <a href="#" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
-                                    Developer Sultra Terima Penghargaan Silver Winner Rumah Subsidi dari FIABCI-REI
-                                </a>
-                                <p class="mt-2 text-dark-75 font-size-sm">
-                                    <i class="far fa-user-circle text-warning"></i> AuthorsName
-                                </p>
-                                <div class="align-items-center">
-                                    <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                        <i class="far fa-heart "></i>
-                                    </a>
-                                    <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                        <i class="fas fa-share-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                <div class="symbol-label" style="background-image: url('/assets/media/stock-600x400/img-5.jpg')"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-custom gutter-b">
-                    <div class="card-body">
-                        <div class="d-flex align-items-top pb-1">
-                            <div class="d-flex flex-column flex-grow-1">
-                                <a href="#" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
-                                    Developer Sultra Terima Penghargaan Silver Winner Rumah Subsidi dari FIABCI-REI
-                                </a>
-                                <p class="mt-2 text-dark-75 font-size-sm">
-                                    <i class="far fa-user-circle text-warning"></i> AuthorsName
-                                </p>
-                                <div class="align-items-center">
-                                    <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                        <i class="far fa-heart "></i>
-                                    </a>
-                                    <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                        <i class="fas fa-share-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                <div class="symbol-label" style="background-image: url('/assets/media/stock-600x400/img-3.jpg')"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-custom gutter-b">
-                    <div class="card-body">
-                        <div class="d-flex align-items-top pb-1">
-                            <div class="d-flex flex-column flex-grow-1">
-                                <a href="#" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
-                                    Developer Sultra Terima Penghargaan Silver Winner Rumah Subsidi dari FIABCI-REI
-                                </a>
-                                <p class="mt-2 text-dark-75 font-size-sm">
-                                    <i class="far fa-user-circle text-warning"></i> AuthorsName
-                                </p>
-                                <div class="align-items-center">
-                                    <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                        <i class="far fa-heart "></i>
-                                    </a>
-                                    <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                        <i class="fas fa-share-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                <div class="symbol-label" style="background-image: url('/assets/media/stock-600x400/img-19.jpg')"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-custom gutter-b">
-                    <div class="card-body">
-                        <div class="d-flex align-items-top pb-1">
-                            <div class="d-flex flex-column flex-grow-1">
-                                <a href="#" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
-                                    Developer Sultra Terima Penghargaan Silver Winner Rumah Subsidi dari FIABCI-REI
-                                </a>
-                                <p class="mt-2 text-dark-75 font-size-sm">
-                                    <i class="far fa-user-circle text-warning"></i> AuthorsName
-                                </p>
-                                <div class="align-items-center">
-                                    <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                        <i class="far fa-heart "></i>
-                                    </a>
-                                    <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                        <i class="fas fa-share-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                <div class="symbol-label" style="background-image: url('/assets/media/stock-600x400/img-2.jpg')"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-custom gutter-b">
-                    <div class="card-body">
-                        <div class="d-flex align-items-top pb-1">
-                            <div class="d-flex flex-column flex-grow-1">
-                                <a href="#" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
-                                    Developer Sultra Terima Penghargaan Silver Winner Rumah Subsidi dari FIABCI-REI
-                                </a>
-                                <p class="mt-2 text-dark-75 font-size-sm">
-                                    <i class="far fa-user-circle text-warning"></i> AuthorsName
-                                </p>
-                                <div class="align-items-center">
-                                    <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                        <i class="far fa-heart "></i>
-                                    </a>
-                                    <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                        <i class="fas fa-share-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                <div class="symbol-label" style="background-image: url('/assets/media/stock-600x400/img-1.jpg')"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {{/each}}
+            
         </div>
     </div>
 </div>

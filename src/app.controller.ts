@@ -1,16 +1,23 @@
 import { Controller, Get, Param, Render, Res } from '@nestjs/common';
 import { AppService } from './app.service';
+import { ArticleService } from './admin/article/article.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly articleService: ArticleService
+  ) {}
 
   @Get('/')
   @Render('features/home/index')
-  index() {
+  async index() {
     const data = {
       title: 'Index',
       content: 'This is content',
+      articles: {
+        trendings: await this.articleService.findAll(9, ''),
+      }
     };
 
     return {
