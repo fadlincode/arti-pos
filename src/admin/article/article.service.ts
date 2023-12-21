@@ -51,4 +51,10 @@ export class ArticleService {
         article[0].view_count++;
         await this.articleRepository.save(article);
     }
+
+    async updateLikeCount(id: number): Promise<void> {
+        const article = await this.findOne(id);
+        article.like_count++;
+        await this.articleRepository.save(article);
+    }
 }

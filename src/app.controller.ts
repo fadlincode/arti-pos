@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Render, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Render, Req, Res } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ArticleService } from './admin/article/article.service';
 
@@ -52,6 +52,16 @@ export class AppController {
 
     return {
       data: data
+    }
+  }
+
+  @Post('/updatelikes')
+  async updateLikes(@Body() body) {
+    await this.articleService.updateLikeCount(body.id);
+
+    const article = await this.articleService.findOne(body.id);
+    return {
+      article: article
     }
   }
 }
