@@ -1,0 +1,63 @@
+{{#> admin}}
+    {{#*inline "content"}}
+        
+
+        <div class="d-flex flex-column-fluid">
+            <div class=" container ">
+                <div class="card card-custom card-stretch gutter-b">
+                    <div class="card-header flex-wrap py-3 justify-content-between">
+                        <div class="card-title">
+                            {{ data.title }}
+                            {{#with data.setting}}
+                        </div>
+                        <div class="card-toolbar">
+                            <ul class="nav nav-pills nav-pills-sm nav-dark-75">
+                                <li class="nav-item d-flex align-items-center">
+                                    <a class="btn btn-outline-success btn-icon" href="/admin/settings/{{ getId }}" title="Refresh">
+                                        <i class="fas fa-undo"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <form action="/admin/settings/{{ getId }}/update" method="POST" enctype="multipart/form-data">                     
+                                <div class="form-group">
+                                    <label for="app_name">App Name <span class="text-danger">*</span></label>
+                                    <input class="form-control form-control-lg" name="app_name" id="app_name" type="text" placeholder="App Name" value="{{ getAppName }}" required/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="app_description">App Description </label>
+                                    <textarea class="form-control form-control-lg" rows="5" name="app_description" id="app_description" placeholder="App Desciption">{{ getAppDescription }}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="app_logo">App Logo </label>
+                                    <input class="form-control form-control-lg" name="app_logo" id="app_logo" type="file" placeholder="App Logo"/>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="reset" class="btn btn-secondary" data-dismiss="modal">Reset</button>
+                                    <button type="submit" class="btn btn-success">Update</button>
+                                </div>
+                            </form>
+
+                            <hr>
+                            <b>Logo Preview : </b><br>
+                            {{#if getAppLogo }}
+                                <div class="flex-shrink-0">
+                                    <img alt="Pic" src="/uploads/setting/{{ getAppLogo }}" width="100px" height="100px">
+                                </div>
+                            {{else}}
+                                <div class="symbol symbol-40 symbol-sm flex-shrink-0">
+                                    <span class="symbol-label font-size-h4 font-weight-bold"></span>
+                                </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{/with}}
+    {{/inline}}
+{{/admin}}

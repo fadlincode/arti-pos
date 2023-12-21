@@ -3,7 +3,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { MediaController } from './admin/media/media.controller';
 import { Media } from './admin/media/media.entity';
 import { MediaService } from './admin/media/media.service';
 import { AdminModule } from './admin/admin.module';
@@ -17,6 +16,8 @@ import { User } from './admin/user/user.entity';
 import { UserService } from './admin/user/user.service';
 import { Article } from './admin/article/article.entity';
 import { ArticleService } from './admin/article/article.service';
+import { SettingService } from './admin/setting/setting.service';
+import { Setting } from './admin/setting/setting.entity';
 
 @Global()
 @Module({
@@ -40,7 +41,8 @@ import { ArticleService } from './admin/article/article.service';
       Journalist,
       Category,
       User,
-      Article
+      Article,
+      Setting
     ]),
     AdminModule
   ],
@@ -52,7 +54,8 @@ import { ArticleService } from './admin/article/article.service';
     JournalistService, 
     CategoryService, 
     UserService,
-    ArticleService
+    ArticleService,
+    SettingService
   ],
   exports: [
     LanguageService,
@@ -60,7 +63,8 @@ import { ArticleService } from './admin/article/article.service';
     JournalistService,
     CategoryService,
     UserService,
-    ArticleService
+    ArticleService,
+    SettingService
   ]
 })
 export class AppModule {}
