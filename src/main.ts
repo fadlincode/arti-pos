@@ -4,6 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import * as hbs from 'hbs';
 import * as hbsUtils from 'hbs-utils';
+import { SettingService } from './admin/setting/setting.service';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -18,14 +19,17 @@ async function bootstrap() {
 
   app.setViewEngine('hbs');
 
-  // Set Global Var
+  // Set Setting Global Var
+  const settings = app.get(SettingService);
+  const globalSetting = await settings.findOne(1);
   const helpers = {
-    appName: 'APP_NAME',
-    appDescription: 'APP_DESCRIPTION',
+    appName: globalSetting.app_name,
+    appDescription: globalSetting.app_description,
+    appLogo: globalSetting.app_logo,
   };
 
   Object.entries(helpers).forEach(([helperName, envVariable]) => {
-    hbs.registerHelper(helperName, () => process.env[envVariable]);
+    hbs.registerHelper(helperName, () => envVariable);
   });
 
   // register math helper
