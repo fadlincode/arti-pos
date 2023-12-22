@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Like, Repository } from 'typeorm';
+import { FindManyOptions, Like, Repository } from 'typeorm';
 import { Article } from './article.entity';
 
 @Injectable()
@@ -10,14 +10,22 @@ export class ArticleService {
         private articleRepository: Repository<Article>,
     ) {}
 
-    findAll(limit: number, searchTerm: string): Promise<Article[]> {
-        return this.articleRepository.find({
-            take: limit,
-            where: {
-                title_original: Like(`%${searchTerm}%`),
-            },
-            relations: ['media','language','journalist']
-        });
+    findAll(serviceParam?: { limit?: number; searchTerm?: string; }): Promise<Article[]> {
+        const queryOptions: FindManyOptions<Article> = {}
+
+        if (serviceParam && serviceParam.limit !== undefined) {
+            queryOptions.take = serviceParam.limit;
+        }
+
+        if (serviceParam && serviceParam.searchTerm) {
+            queryOptions.where = {
+                title_original: Like(`%${serviceParam.searchTerm}%`),
+            }
+        }
+
+        queryOptions.relations = ['media','language','journalist'];
+
+        return this.articleRepository.find(queryOptions);
     }
 
     findOne(id: number): Promise<Article | null> {

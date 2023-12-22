@@ -12,12 +12,14 @@ export class CategoryController {
         @Query('limit') limit: number,
         @Query('searchTerm') searchTerm: string
     ) {
-        limit = limit || 10;
-        searchTerm = searchTerm || '';
+        const serviceParam = {
+            limit: limit || 10,
+            searchTerm: searchTerm || ''
+        }
 
         const data = {
             title: 'Category',
-            categories: await this.categoryService.findAll(limit, searchTerm),
+            categories: await this.categoryService.findAll(serviceParam),
             searchTerm: searchTerm
         }
 

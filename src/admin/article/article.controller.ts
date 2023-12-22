@@ -12,12 +12,14 @@ export class ArticleController {
         @Query('limit') limit: number,
         @Query('searchTerm') searchTerm: string
     ) {
-        limit = limit || 10;
-        searchTerm = searchTerm || '';
+        const serviceParam = {
+            limit: limit || 10,
+            searchTerm: searchTerm || ''
+        }
 
         const data = {
             title: 'Article',
-            articles: await this.articleService.findAll(limit, searchTerm),
+            articles: await this.articleService.findAll(serviceParam),
             searchTerm: searchTerm
         }
 

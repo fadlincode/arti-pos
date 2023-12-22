@@ -12,12 +12,14 @@ export class MediaController {
         @Query('limit') limit: number,
         @Query('searchTerm') searchTerm: string
     ) {
-        limit = limit || 10;
-        searchTerm = searchTerm || '';
+        const serviceParam = {
+            limit: limit || 10,
+            searchTerm: searchTerm || ''
+        }
 
         const data = {
             title: 'Media',
-            medias: await this.mediaService.findAll(limit, searchTerm),
+            medias: await this.mediaService.findAll(serviceParam),
             searchTerm: searchTerm
         }
 

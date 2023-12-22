@@ -12,12 +12,14 @@ export class LanguageController {
         @Query('limit') limit: number,
         @Query('searchTerm') searchTerm: string
     ) {
-        limit = limit || 10;
-        searchTerm = searchTerm || '';
+        const serviceParam = {
+            limit: limit || 10,
+            searchTerm: searchTerm || ''
+        }
 
         const data = {
             title: 'Language',
-            languages: await this.languageService.findAll(limit, searchTerm),
+            languages: await this.languageService.findAll(serviceParam),
             searchTerm: searchTerm
         }
 

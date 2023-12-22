@@ -15,12 +15,14 @@ export class JournalistController {
         @Query('limit') limit: number,
         @Query('searchTerm') searchTerm: string
     ) {
-        limit = limit || 10;
-        searchTerm = searchTerm || '';
+        const serviceParam = {
+            limit: limit || 10,
+            searchTerm: searchTerm || ''
+        }
 
         const data = {
             title: 'Journalist',
-            journalists: await this.journalistService.findAll(limit, searchTerm),
+            journalists: await this.journalistService.findAll(serviceParam),
             searchTerm: searchTerm
         }
 

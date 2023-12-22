@@ -12,11 +12,15 @@ export class AppController {
   @Get('/')
   @Render('features/home/index')
   async index() {
+    const serviceParam = {
+      limit: 10
+    }
+
     const data = {
       title: 'Index',
       content: 'This is content',
       articles: {
-        trendings: await this.articleService.findAll(9, ''),
+        trendings: await this.articleService.findAll(serviceParam),
       }
     };
 
@@ -28,13 +32,15 @@ export class AppController {
   @Get('/read/:slug')
   @Render('features/home/detail')
   async detail(@Param('slug') slug: string) {
-
+    const serviceParam = {
+      limit: 10
+    }
     await this.articleService.updateViewCount(slug);
 
     const data = {
       title: 'Detail Berita',
       article: await this.articleService.findBySlug(slug),
-      trendings: await this.articleService.findAll(9, ''),
+      trendings: await this.articleService.findAll(serviceParam),
     };
 
     return {
@@ -45,9 +51,13 @@ export class AppController {
   @Get('/page/:category')
   @Render('features/home/page')
   async page(@Param('category') category: string) {
+    const serviceParam = {
+      limit: 10
+    }
+
     const data = {
       title: category.toUpperCase(),
-      articles: await this.articleService.findAll(9, '')
+      articles: await this.articleService.findAll(serviceParam)
     };
 
     return {

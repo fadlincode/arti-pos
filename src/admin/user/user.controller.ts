@@ -13,12 +13,14 @@ export class UserController {
         @Query('limit') limit: number,
         @Query('searchTerm') searchTerm: string
     ) {
-        limit = limit || 10;
-        searchTerm = searchTerm || '';
+        const serviceParam = {
+            limit: limit || 10,
+            searchTerm: searchTerm || ''
+        }
 
         const data = {
             title: 'User',
-            users: await this.userService.findAll(limit, searchTerm),
+            users: await this.userService.findAll(serviceParam),
             searchTerm: searchTerm
         }
 

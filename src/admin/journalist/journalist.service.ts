@@ -1,7 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Journalist } from "./journalist.entity";
-import { Like, Repository } from "typeorm";
+import { FindManyOptions, Like, Repository } from "typeorm";
+import { paginate, Pagination, IPaginationOptions } from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class JournalistService {
@@ -10,13 +11,20 @@ export class JournalistService {
         private journalistRepository: Repository<Journalist>,
     ) {}
 
-    findAll(limit: number, searchTerm: string): Promise<Journalist[]> {
-        return this.journalistRepository.find({
-            take: limit,
-            where: {
-                name: Like(`%${searchTerm}%`),
-            },
-        });
+    findAll(serviceParam?: { limit?: number; searchTerm?: string }): Promise<Journalist[]> {
+        const queryOptions: FindManyOptions<Journalist> = {}
+
+        if (serviceParam && serviceParam.limit !== undefined) {
+            queryOptions.take = serviceParam.limit;
+        }
+
+        if (serviceParam && serviceParam.searchTerm) {
+            queryOptions.where = {
+                name: Like(`%${serviceParam.searchTerm}%`),
+            }
+        }
+
+        return this.journalistRepository.find(queryOptions);
     }
 
     findOne(id: number): Promise<Journalist | null> {
