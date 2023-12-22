@@ -5,7 +5,7 @@ import { join } from 'path';
 import * as hbs from 'hbs';
 import * as hbsUtils from 'hbs-utils';
 import { SettingService } from './admin/setting/setting.service';
-import { evalHelper, logHelper, ternary } from './helpers/sites';
+import { evalHelper, logHelper, numbering, ternary } from './helpers/sites';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -37,6 +37,7 @@ async function bootstrap() {
   hbs.registerHelper('eval', evalHelper);
   hbs.registerHelper('log', logHelper);
   hbs.registerHelper('ternary', ternary);
+  hbs.registerHelper('numbering', numbering);
 
   await app.listen(3000);
 }

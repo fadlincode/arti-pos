@@ -15,3 +15,8 @@ export function ternary(condition: any, valueIfTrue: any, valueIfFalse: any): an
     return condition ? valueIfTrue : valueIfFalse;
 }
 
+// numbering
+export function numbering(currentPage: number, perPage: number, index: number): number {
+    return (index + 1)  ;
+}
+

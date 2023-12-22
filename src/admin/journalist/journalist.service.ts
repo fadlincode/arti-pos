@@ -11,20 +11,24 @@ export class JournalistService {
         private journalistRepository: Repository<Journalist>,
     ) {}
 
-    findAll(serviceParam?: { limit?: number; searchTerm?: string }): Promise<Journalist[]> {
-        const queryOptions: FindManyOptions<Journalist> = {}
+    async findAll(serviceParam?: { options? : IPaginationOptions; searchTerm?: string }): Promise<Pagination<Journalist>> {
+        const queryOptions: FindManyOptions<Journalist> = {};
 
-        if (serviceParam && serviceParam.limit !== undefined) {
-            queryOptions.take = serviceParam.limit;
+        if (serviceParam?.options?.limit !== undefined) {
+            queryOptions.take = Number(serviceParam.options.limit);
+        }
+        
+        const queryBuilder = this.journalistRepository.createQueryBuilder();
+
+        if (serviceParam?.searchTerm) {
+            queryBuilder.where('journalist.name LIKE :searchTerm', { searchTerm: `%${serviceParam.searchTerm}%` });
         }
 
-        if (serviceParam && serviceParam.searchTerm) {
-            queryOptions.where = {
-                name: Like(`%${serviceParam.searchTerm}%`),
-            }
-        }
-
-        return this.journalistRepository.find(queryOptions);
+        return paginate<Journalist>(queryBuilder, {
+            limit: queryOptions.take,
+            page: serviceParam?.options?.page,
+            route: serviceParam?.options?.route,
+        });
     }
 
     findOne(id: number): Promise<Journalist | null> {

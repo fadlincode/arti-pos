@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, Redirect, Render, UploadedFile, UseInterceptors } from "@nestjs/common";
+import { Body, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Post, Query, Redirect, Render, UploadedFile, UseInterceptors } from "@nestjs/common";
 import { JournalistService } from "./journalist.service";
 import { Journalist } from "./journalist.entity";
 import { FileInterceptor } from "@nestjs/platform-express";
@@ -12,12 +12,19 @@ export class JournalistController {
     @Get('/')
     @Render('features/admin/journalist/index')
     async index(
+        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
         @Query('limit') limit: number,
         @Query('searchTerm') searchTerm: string
     ) {
         const serviceParam = {
-            limit: limit || 10,
+            options: {
+                page: page,
+                limit: limit || 10,
+                route: '/admin/journalists' + (searchTerm ? '?searchTerm=' + searchTerm : '')
+            },
+
             searchTerm: searchTerm || ''
+            
         }
 
         const data = {
