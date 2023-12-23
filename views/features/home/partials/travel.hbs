@@ -22,41 +22,11 @@
 <div class="row mt-4">
     <div class="col-md-12">
         <div class="row">
-            {{#each data.articles.trendings}}
+            {{#each data.articles.trendings.items}}
             <div class="col-md-4">
-                <div class="card card-custom gutter-b" style="height: 280px;">
-                    <div class="card-body">
-                        <div class="d-flex align-items-top pb-1">
-                            <div class="d-flex flex-column flex-grow-1">
-                                <a href="/read/{{getSlug}}" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
-                                    {{getTitle}}
-                                </a>
-                                <p class="mt-2 text-dark-75 font-size-sm">
-                                    <i class="far fa-user-circle text-warning"></i> <b>[{{media.name}}]</b> - {{journalist.name}}
-                                </p>
-                                <div class="align-items-center">
-                                    <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2 updateLikeBtn" data-id="{{getId}}">
-                                        <i class="far fa-heart iconClass">
-                                            {{#if getLikeCount}}
-                                            <span class="label label-sm label-danger likeCount" data-id="{{getId}}">{{getLikeCount}}</span>
-                                            {{/if}}
-                                        </i>
-                                    </a>
-                                    <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                        <i class="far fa-eye iconClass">
-                                            {{#if getViewCount}}
-                                            <span class="label label-sm label-warning">{{getViewCount}}</span>
-                                            {{/if}}
-                                        </i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                <div class="symbol-label" style="background-image: url('{{getImage}}')"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {{> features/home/components/card_single_horizontal
+                    cardHeight="280px"
+                }}
             </div>
             {{/each}}
             

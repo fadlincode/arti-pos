@@ -43,9 +43,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{#each data.medias}}
+                                    {{#each data.medias.items}}
                                     <tr>
-                                        <td>{{eval @index " + 1" }}</td>
+                                        <td>{{numbering ../data.medias.meta.currentPage ../data.medias.meta.itemsPerPage @index }}</td>
                                         <td>
                                             <a href="/admin/medias/{{ getId }}"
                                                 class="label label-inline label-warning">
@@ -122,6 +122,24 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="card-footer">
+                        {{#with data.medias}}
+                        <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
+                            <div class="">
+                                 <b>Showing : </b>
+                                {{showingPagination meta.currentPage meta.itemsPerPage meta.itemCount meta.totalItems}}
+                                Data
+                            </div>
+                            <div class="">
+                                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                    <a href="{{links.previous}}" type="button" class="btn {{ternary links.previous "btn-outline-secondary" "btn-secondary"}} btn-secondary {{le}} font-weight-bold">previous</a>
+                                    <a href="{{links.next}}" type="button" class="btn {{ternary links.next "btn-outline-secondary" "btn-secondary"}} font-weight-bold">next</a>
+                                </div>
+                            </div>
+                        </div>
+                        {{/with}}
                     </div>
                 </div>
             </div>

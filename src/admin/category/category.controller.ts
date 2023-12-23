@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, Redirect, Render } from '@nestjs/common';
+import { Body, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Post, Query, Redirect, Render } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { Category } from './category.entity';
 
@@ -9,15 +9,22 @@ export class CategoryController {
     @Get('/')
     @Render('features/admin/category/index')
     async index(
+        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
         @Query('limit') limit: number,
         @Query('searchTerm') searchTerm: string
     ) {
-        limit = limit || 10;
-        searchTerm = searchTerm || '';
+        const serviceParam = {
+            options: {
+                page: page,
+                limit: limit || 5,
+                route: '/admin/categories' + (searchTerm ? '?searchTerm=' + searchTerm : '')
+            },
+            searchTerm: searchTerm || ''
+        }
 
         const data = {
             title: 'Category',
-            categories: await this.categoryService.findAll(limit, searchTerm),
+            categories: await this.categoryService.findAll(serviceParam),
             searchTerm: searchTerm
         }
 

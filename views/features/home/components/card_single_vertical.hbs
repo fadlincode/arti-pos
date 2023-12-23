@@ -1,0 +1,32 @@
+<div class="card card-custom gutter-b" style="height: {{cardHeight}};">
+    <div class="card-body">
+        <div class="pt-4">
+            <div class="bgi-no-repeat bgi-size-cover rounded min-h-125px" style="background-image: url({{image}})"></div>
+            <p class="text-dark-50 font-size-lg font-weight-bold text-hover-primary pt-5 mb-2">
+                <a href="/read/{{slug}}">
+                    {{title_original}}
+                </a>
+            </p>
+            <p class="text-dark-50 mt-2">
+                <i class="far fa-user-circle text-warning"></i> <b>[{{media.name}}]</b> - {{journalist.name}}
+            </p>
+
+            <div class="align-items-center">
+                <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2 updateLikeBtn" data-id="{{id}}">
+                    <i class="far fa-heart iconClass">
+                        {{#if like_count}}
+                        <span class="label label-sm label-danger likeCount" data-id="{{id}}">{{like_count}}</span>
+                        {{/if}}
+                    </i>
+                </a>
+                <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
+                    <i class="far fa-eye iconClass">
+                        {{#if view_count}}
+                        <span class="label label-sm label-warning">{{view_count}}</span>
+                        {{/if}}
+                    </i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

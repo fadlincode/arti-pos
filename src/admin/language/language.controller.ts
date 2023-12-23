@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, Redirect, Render } from "@nestjs/common";
+import { Body, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Post, Query, Redirect, Render } from "@nestjs/common";
 import { LanguageService } from "./language.service";
 import { Language } from "./language.entity";
 
@@ -9,15 +9,22 @@ export class LanguageController {
     @Get('/')
     @Render('features/admin/language/index')
     async index(
+        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
         @Query('limit') limit: number,
         @Query('searchTerm') searchTerm: string
     ) {
-        limit = limit || 10;
-        searchTerm = searchTerm || '';
+        const serviceParam = {
+            options: {
+                page: page,
+                limit: limit || 10,
+                route: '/admin/language' + (searchTerm ? '?searchTerm=' + searchTerm : '')
+            },
+            searchTerm: searchTerm || ''
+        }
 
         const data = {
             title: 'Language',
-            languages: await this.languageService.findAll(limit, searchTerm),
+            languages: await this.languageService.findAll(serviceParam),
             searchTerm: searchTerm
         }
 

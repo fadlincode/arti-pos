@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Like, Repository } from 'typeorm';
 import { Article } from './article.entity';
+import { IPaginationOptions, Pagination, paginate } from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class ArticleService {
@@ -10,13 +11,22 @@ export class ArticleService {
         private articleRepository: Repository<Article>,
     ) {}
 
-    findAll(limit: number, searchTerm: string): Promise<Article[]> {
-        return this.articleRepository.find({
-            take: limit,
-            where: {
-                title_original: Like(`%${searchTerm}%`),
-            },
-            relations: ['media','language','journalist']
+    async findAll(serviceParam?: { options? : IPaginationOptions; searchTerm?: string }): Promise<Pagination<Article>> {
+        const queryBuilder = this.articleRepository.createQueryBuilder('article');
+
+        if (serviceParam?.searchTerm) {
+            queryBuilder.where('article.title_original LIKE :searchTerm', { searchTerm: `%${serviceParam.searchTerm}%` });
+        }
+
+        queryBuilder
+            .leftJoinAndSelect('article.media', 'media')
+            .leftJoinAndSelect('article.language', 'language')
+            .leftJoinAndSelect('article.journalist', 'journalist');
+
+        return paginate<Article>(queryBuilder, {
+            limit: serviceParam?.options?.limit,
+            page: serviceParam?.options?.page,
+            route: serviceParam?.options?.route,
         });
     }
 

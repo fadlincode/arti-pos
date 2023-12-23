@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Param, Post, Query, Redirect, Render, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { SettingService } from './setting.service';
-import { Setting } from './setting.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { join } from 'path';
 import { stat, unlink } from 'fs/promises';

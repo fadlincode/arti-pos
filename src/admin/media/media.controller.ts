@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, Redirect, Render } from '@nestjs/common';
+import { Body, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Post, Query, Redirect, Render } from '@nestjs/common';
 import { MediaService } from './media.service';
 import { Media } from './media.entity';
 
@@ -9,15 +9,23 @@ export class MediaController {
     @Get('/')
     @Render('features/admin/media/index')
     async index(
+        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
         @Query('limit') limit: number,
         @Query('searchTerm') searchTerm: string
     ) {
-        limit = limit || 10;
-        searchTerm = searchTerm || '';
+        const serviceParam = {
+            options: {
+                page: page,
+                limit: limit || 10,
+                route: '/admin/medias' + (searchTerm ? '?searchTerm=' + searchTerm : '')
+            },
+
+            searchTerm: searchTerm || ''
+        }
 
         const data = {
             title: 'Media',
-            medias: await this.mediaService.findAll(limit, searchTerm),
+            medias: await this.mediaService.findAll(serviceParam),
             searchTerm: searchTerm
         }
 

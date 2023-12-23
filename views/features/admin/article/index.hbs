@@ -39,9 +39,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{#each data.articles}}
+                                    {{#each data.articles.items}}
                                     <tr>
-                                        <td>{{eval @index " + 1" }}</td>
+                                        <td>{{numbering ../data.articles.meta.currentPage ../data.articles.meta.itemsPerPage @index }}</td>
                                         <td>
                                             <a href="#" class="label label-inline label-danger" data-toggle="modal" title="Tambah" data-target="#deleteModal{{ getId }}">
                                                 hapus
@@ -107,6 +107,23 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="card-footer">
+                        {{#with data.articles}}
+                        <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
+                            <div class="">
+                                 <b>Showing : </b>
+                                {{showingPagination meta.currentPage meta.itemsPerPage meta.itemCount meta.totalItems}}
+                                Data
+                            </div>
+                            <div class="">
+                                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                    <a href="{{links.previous}}" type="button" class="btn {{ternary links.previous "btn-outline-secondary" "btn-secondary"}} btn-secondary {{le}} font-weight-bold">previous</a>
+                                    <a href="{{links.next}}" type="button" class="btn {{ternary links.next "btn-outline-secondary" "btn-secondary"}} font-weight-bold">next</a>
+                                </div>
+                            </div>
+                        </div>
+                        {{/with}}
                     </div>
                 </div>
             </div>
