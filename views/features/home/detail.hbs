@@ -65,58 +65,12 @@
                     {{/each}}
                     
                     <div class="col-md-4">
-                        {{!-- Trending --}}
-                        <div class="card card-custom gutter-b">
-                            <div style="height: 680px; overflow-y: auto;">
-                                <div class="card-header border-0 pt-7">
-                                    <div class="d-flex align-items-center">
-                                        <span class="bullet bullet-bar bg-danger align-self-stretch"></span>
-                                        <label class="checkbox checkbox-lg checkbox-light-success checkbox-inline flex-shrink-0 m-0 mx-4"></label>
-                                        <div class="d-flex flex-column flex-grow-1">
-                                            <h1 class="text-dark-75 text-hover-primary font-weight-boldest font-size-h1 mb-1">
-                                                Trending
-                                            </h1>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body pt-1">
-                                    <div class="tab-content mt-5" id="myTabLIist18">
-                                        <div class="tab-pane fade show active" id="kt_tab_pane_news_month" role="tabpanel" aria-labelledby="kt_tab_pane_news_month">
-                                            <div class="form">
-                                                {{#each data.trendings}}
-                                                <div class="d-flex align-items-top pb-9">
-                                                    <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                                        <div class="symbol-label" style="background-image: url('{{getImage}}')"></div>
-                                                    </div>
-                                                    <div class="d-flex flex-column flex-grow-1">
-                                                        <a href="/read/{{getSlug}}" class="text-dark-50 font-weight-bold font-size-lg text-hover-primary mb-1">
-                                                            {{getTitle}}
-                                                        </a>
-                                                        <p class="mt-2 text-dark-75 font-size-sm">
-                                                            <i class="far fa-user-circle text-warning"></i> <b>[{{media.name}}]</b> - {{journalist.name}}
-                                                        </p>
-                                                        <div class="align-items-center">
-                                                            <a href="#" class="btn btn-sm btn-text-dark-50 btn-hover-icon-danger p-2">
-                                                                <i class="far fa-heart "></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary p-2">
-                                                                <i class="fas fa-share-alt"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="separator separator-solid mb-4"></div>
-                                                {{/each}}
-
-                                                <div class="d-flex align-items-top pb-9">
-                                                    <a href="/page/trendings" class="btn btn-primary btn-block"> Lainnya</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {{> features/home/components/card_list 
+                            news=data.trendings.items
+                            cardTitle="Trending" 
+                            cardLink="/page/trending"
+                            cardHeight="330px"
+                        }}
                     </div>
                 </div>
             </div>
