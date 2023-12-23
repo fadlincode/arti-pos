@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindManyOptions, Like, Repository } from 'typeorm';
 import { Media } from './media.entity';
+import { IPaginationOptions, Pagination, paginate } from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class MediaService {
@@ -9,22 +10,24 @@ export class MediaService {
         @InjectRepository(Media)
         private mediaRepository: Repository<Media>,
     ) {}
-
-    findAll(serviceParam?: { limit?: number; searchTerm?: string }): Promise<Media[]> {
-        const queryOptions: FindManyOptions<Media> = {}
-
-        if (serviceParam && serviceParam.limit !== undefined) {
-            queryOptions.take = serviceParam.limit;
+    
+    async findAll(serviceParam?: { options? : IPaginationOptions; searchTerm?: string }): Promise<Pagination<Media>> {
+        const queryBuilder = this.mediaRepository.createQueryBuilder();
+        if (serviceParam?.options?.limit !== undefined) {
+            queryBuilder.take(Number(serviceParam?.options?.limit))
         }
 
-        if (serviceParam && serviceParam.searchTerm) {
-            queryOptions.where = {
-                name: Like(`%${serviceParam.searchTerm}%`),
-            }
+        if (serviceParam?.searchTerm) {
+            queryBuilder.where('media.name LIKE :searchTerm', { searchTerm: `%${serviceParam.searchTerm}%` });
         }
 
-        return this.mediaRepository.find(queryOptions);
+        return paginate<Media>(queryBuilder, {
+            limit: serviceParam?.options?.limit,
+            page: serviceParam?.options?.page,
+            route: serviceParam?.options?.route,
+        });
     }
+
 
     findOne(id: number): Promise<Media | null> {
         return this.mediaRepository.findOneBy({ id });

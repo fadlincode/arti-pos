@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindManyOptions, Like, Repository } from 'typeorm';
 import { User } from './user.entity';
+import { IPaginationOptions, Pagination, paginate } from 'nestjs-typeorm-paginate';
 
 
 @Injectable()
@@ -11,20 +12,21 @@ export class UserService {
         private userRepository: Repository<User>,
     ) {}
 
-    findAll(serviceParam?: { limit?: number; searchTerm?: string }): Promise<User[]> {
-        const queryOptions: FindManyOptions<User> = {}
-
-        if (serviceParam && serviceParam.limit !== undefined) {
-            queryOptions.take = serviceParam.limit;
+    async findAll(serviceParam?: { options? : IPaginationOptions; searchTerm?: string }): Promise<Pagination<User>> {
+        const queryBuilder = this.userRepository.createQueryBuilder();
+        if (serviceParam?.options?.limit !== undefined) {
+            queryBuilder.take(Number(serviceParam?.options?.limit))
         }
 
-        if (serviceParam && serviceParam.searchTerm) {
-            queryOptions.where = {
-                name: Like(`%${serviceParam.searchTerm}%`),
-            }
+        if (serviceParam?.searchTerm) {
+            queryBuilder.where('user.name LIKE :searchTerm', { searchTerm: `%${serviceParam.searchTerm}%` });
         }
 
-        return this.userRepository.find(queryOptions);
+        return paginate<User>(queryBuilder, {
+            limit: serviceParam?.options?.limit,
+            page: serviceParam?.options?.page,
+            route: serviceParam?.options?.route,
+        });
     }
 
     findOne(id: number): Promise<User | null> {

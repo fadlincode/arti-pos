@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Language } from "./language.entity";
 import { FindManyOptions, Like, Repository } from "typeorm";
+import { IPaginationOptions, Pagination, paginate } from "nestjs-typeorm-paginate";
 
 @Injectable()
 export class LanguageService {
@@ -10,20 +11,21 @@ export class LanguageService {
         private languageRepository: Repository<Language>,
     ) {}
 
-    findAll(serviceParam?: { limit?: number; searchTerm?: string }): Promise<Language[]> {
-        const queryOptions: FindManyOptions<Language> = {}
-
-        if (serviceParam && serviceParam.limit !== undefined) {
-            queryOptions.take = serviceParam.limit;
+    async findAll(serviceParam?: { options? : IPaginationOptions; searchTerm?: string }): Promise<Pagination<Language>> {
+        const queryBuilder = this.languageRepository.createQueryBuilder();
+        if (serviceParam?.options?.limit !== undefined) {
+            queryBuilder.take(Number(serviceParam?.options?.limit))
         }
 
-        if (serviceParam && serviceParam.searchTerm) {
-            queryOptions.where = {
-                name: Like(`%${serviceParam.searchTerm}%`),
-            }
+        if (serviceParam?.searchTerm) {
+            queryBuilder.where('language.name LIKE :searchTerm', { searchTerm: `%${serviceParam.searchTerm}%` });
         }
 
-        return this.languageRepository.find(queryOptions);
+        return paginate<Language>(queryBuilder, {
+            limit: serviceParam?.options?.limit,
+            page: serviceParam?.options?.page,
+            route: serviceParam?.options?.route,
+        });
     }
 
     findOne(id: number): Promise<Language | null> {

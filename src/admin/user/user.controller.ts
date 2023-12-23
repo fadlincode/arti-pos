@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, Redirect, Render } from '@nestjs/common';
+import { Body, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Post, Query, Redirect, Render } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './user.entity';
 import * as bcrypt from 'bcrypt';
@@ -10,11 +10,16 @@ export class UserController {
     @Get('/')
     @Render('features/admin/user/index')
     async index(
+        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
         @Query('limit') limit: number,
         @Query('searchTerm') searchTerm: string
     ) {
         const serviceParam = {
-            limit: limit || 10,
+            options: {
+                page: page,
+                limit: limit || 10,
+                route: '/admin/users' + (searchTerm ? '?searchTerm=' + searchTerm : '')
+            },
             searchTerm: searchTerm || ''
         }
 

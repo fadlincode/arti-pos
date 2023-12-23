@@ -22,7 +22,6 @@ export class JournalistController {
                 limit: limit || 10,
                 route: '/admin/journalists' + (searchTerm ? '?searchTerm=' + searchTerm : '')
             },
-
             searchTerm: searchTerm || ''
             
         }
