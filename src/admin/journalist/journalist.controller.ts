@@ -34,7 +34,7 @@ export class JournalistController {
         }
 
         return {
-            data: data
+            data: data,
         }
     }
 

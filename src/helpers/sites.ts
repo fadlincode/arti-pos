@@ -17,6 +17,10 @@ export function ternary(condition: any, valueIfTrue: any, valueIfFalse: any): an
 
 // numbering
 export function numbering(currentPage: number, perPage: number, index: number): number {
-    return (index + 1)  ;
+    return ((currentPage - 1) * perPage) + (index + 1) ;
+}
+
+export function showingPagination(currentPage: number, perPage: number, itemCount: number, totalItems: number): string {
+    return (((currentPage - 1) * perPage) + (1)) + ' - '+ (((currentPage - 1) * perPage) + itemCount) + ' of ' + totalItems ;
 }
 
