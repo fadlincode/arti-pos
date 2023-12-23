@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindManyOptions, Like, Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { Article } from './article.entity';
+import { IPaginationOptions, Pagination, paginate } from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class ArticleService {
@@ -10,22 +11,23 @@ export class ArticleService {
         private articleRepository: Repository<Article>,
     ) {}
 
-    findAll(serviceParam?: { limit?: number; searchTerm?: string; }): Promise<Article[]> {
-        const queryOptions: FindManyOptions<Article> = {}
+    async findAll(serviceParam?: { options? : IPaginationOptions; searchTerm?: string }): Promise<Pagination<Article>> {
+        const queryBuilder = this.articleRepository.createQueryBuilder('article');
 
-        if (serviceParam && serviceParam.limit !== undefined) {
-            queryOptions.take = serviceParam.limit;
+        if (serviceParam?.searchTerm) {
+            queryBuilder.where('article.title_original LIKE :searchTerm', { searchTerm: `%${serviceParam.searchTerm}%` });
         }
 
-        if (serviceParam && serviceParam.searchTerm) {
-            queryOptions.where = {
-                title_original: Like(`%${serviceParam.searchTerm}%`),
-            }
-        }
+        queryBuilder
+            .leftJoinAndSelect('article.media', 'media')
+            .leftJoinAndSelect('article.language', 'language')
+            .leftJoinAndSelect('article.journalist', 'journalist');
 
-        queryOptions.relations = ['media','language','journalist'];
-
-        return this.articleRepository.find(queryOptions);
+        return paginate<Article>(queryBuilder, {
+            limit: serviceParam?.options?.limit,
+            page: serviceParam?.options?.page,
+            route: serviceParam?.options?.route,
+        });
     }
 
     findOne(id: number): Promise<Article | null> {

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindManyOptions, Like, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Media } from './media.entity';
 import { IPaginationOptions, Pagination, paginate } from 'nestjs-typeorm-paginate';
 
@@ -13,10 +13,7 @@ export class MediaService {
     
     async findAll(serviceParam?: { options? : IPaginationOptions; searchTerm?: string }): Promise<Pagination<Media>> {
         const queryBuilder = this.mediaRepository.createQueryBuilder();
-        if (serviceParam?.options?.limit !== undefined) {
-            queryBuilder.take(Number(serviceParam?.options?.limit))
-        }
-
+        
         if (serviceParam?.searchTerm) {
             queryBuilder.where('media.name LIKE :searchTerm', { searchTerm: `%${serviceParam.searchTerm}%` });
         }

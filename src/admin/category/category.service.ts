@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindManyOptions, Like, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Category } from './category.entity';
 import { IPaginationOptions, Pagination, paginate } from 'nestjs-typeorm-paginate';
 
@@ -13,10 +13,7 @@ export class CategoryService {
 
     async findAll(serviceParam?: { options? : IPaginationOptions; searchTerm?: string }): Promise<Pagination<Category>> {
         const queryBuilder = this.categoryRepository.createQueryBuilder();
-        if (serviceParam?.options?.limit !== undefined) {
-            queryBuilder.take(Number(serviceParam?.options?.limit))
-        }
-
+        
         if (serviceParam?.searchTerm) {
             queryBuilder.where('category.name LIKE :searchTerm', { searchTerm: `%${serviceParam.searchTerm}%` });
         }

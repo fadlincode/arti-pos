@@ -9,69 +9,71 @@ export class AppController {
     private readonly articleService: ArticleService
   ) {}
 
-  @Get('/')
-  @Render('features/home/index')
-  async index() {
-    const serviceParam = {
-      limit: 10
-    }
+  // @Get('/')
+  // @Render('features/home/index')
+  // async index() {
+  //   const serviceParam = {
+  //     options: {
+  //       limit: 10,
+  //     }
+  //   }
 
-    const data = {
-      title: 'Index',
-      content: 'This is content',
-      articles: {
-        trendings: await this.articleService.findAll(serviceParam),
-      }
-    };
+  //   const data = {
+  //     title: 'Index',
+  //     content: 'This is content',
+  //     articles: {
+  //       trendings: await this.articleService.findAll(serviceParam),
+  //     }
+  //   };
 
-    return {
-      data: data,
-    };
-  }
+  //   return {
+  //     data: data,
+  //   };
+  // }
 
-  @Get('/read/:slug')
-  @Render('features/home/detail')
-  async detail(@Param('slug') slug: string) {
-    const serviceParam = {
-      limit: 10
-    }
-    await this.articleService.updateViewCount(slug);
+  // @Get('/read/:slug')
+  // @Render('features/home/detail')
+  // async detail(@Param('slug') slug: string) {
+  //   const serviceParam = {
+  //     limit: 10
+  //   }
+  //   await this.articleService.updateViewCount(slug);
 
-    const data = {
-      title: 'Detail Berita',
-      article: await this.articleService.findBySlug(slug),
-      trendings: await this.articleService.findAll(serviceParam),
-    };
+  //   const data = {
+  //     title: 'Detail Berita',
+  //     article: await this.articleService.findBySlug(slug),
+  //     trendings: await this.articleService.findAll(serviceParam),
+  //   };
 
-    return {
-      data: data
-    }
-  }
+  //   return {
+  //     data: data
+  //   }
+  // }
 
-  @Get('/page/:category')
-  @Render('features/home/page')
-  async page(@Param('category') category: string) {
-    const serviceParam = {
-      limit: 10
-    }
+  // @Get('/page/:category')
+  // @Render('features/home/page')
+  // async page(@Param('category') category: string) {
+  //   const serviceParam = {
+  //     limit: 10
+  //   }
 
-    const data = {
-      title: category.toUpperCase(),
-      articles: await this.articleService.findAll(serviceParam)
-    };
+  //   const data = {
+  //     title: category.toUpperCase(),
+  //     articles: await this.articleService.findAll(serviceParam)
+  //   };
 
-    return {
-      data: data
-    }
-  }
+  //   return {
+  //     data: data
+  //   }
+  // }
 
-  @Post('/updatelikes')
-  async updateLikes(@Body() body) {
-    await this.articleService.updateLikeCount(body.id);
+  // @Post('/updatelikes')
+  // async updateLikes(@Body() body) {
+  //   await this.articleService.updateLikeCount(body.id);
 
-    const article = await this.articleService.findOne(body.id);
-    return {
-      article: article
-    }
-  }
+  //   const article = await this.articleService.findOne(body.id);
+  //   return {
+  //     article: article
+  //   }
+  // }
 }

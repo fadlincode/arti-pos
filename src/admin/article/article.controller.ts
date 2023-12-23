@@ -1,6 +1,5 @@
-import { Body, Controller, Get, Param, Post, Query, Redirect, Render } from '@nestjs/common';
+import { Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Post, Query, Redirect, Render } from '@nestjs/common';
 import { ArticleService } from './article.service';
-import { Article } from './article.entity';
 
 @Controller('/admin/articles')
 export class ArticleController {
@@ -9,18 +8,24 @@ export class ArticleController {
     @Get('/')
     @Render('features/admin/article/index')
     async index(
+        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
         @Query('limit') limit: number,
         @Query('searchTerm') searchTerm: string
     ) {
         const serviceParam = {
-            limit: limit || 10,
+            options: {
+                page: page,
+                limit: limit || 10,
+                route: '/admin/articles' + (searchTerm ? '?searchTerm=' + searchTerm : '')
+            },
             searchTerm: searchTerm || ''
         }
 
         const data = {
             title: 'Article',
             articles: await this.articleService.findAll(serviceParam),
-            searchTerm: searchTerm
+            searchTerm: searchTerm,
+            page: page
         }
 
         return {

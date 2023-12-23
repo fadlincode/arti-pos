@@ -14,10 +14,7 @@ export class UserService {
 
     async findAll(serviceParam?: { options? : IPaginationOptions; searchTerm?: string }): Promise<Pagination<User>> {
         const queryBuilder = this.userRepository.createQueryBuilder();
-        if (serviceParam?.options?.limit !== undefined) {
-            queryBuilder.take(Number(serviceParam?.options?.limit))
-        }
-
+        
         if (serviceParam?.searchTerm) {
             queryBuilder.where('user.name LIKE :searchTerm', { searchTerm: `%${serviceParam.searchTerm}%` });
         }
