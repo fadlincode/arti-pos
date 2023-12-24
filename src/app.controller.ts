@@ -67,7 +67,7 @@ export class AppController {
         const serviceParam = {
             options: {
                 page: page,
-                limit: limit,
+                limit: limit || 10,
                 route: '/page/' + category + '/',
             }
         }
@@ -75,6 +75,33 @@ export class AppController {
         const data = {
             title: category.toUpperCase(),
             articles: await this.articleService.findAll(serviceParam)
+        };
+
+        return {
+            data: data
+        }
+    }
+
+    @Get('/search/')
+    @Render('features/home/search')
+    async search(
+        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+        @Query('limit') limit: number,
+        @Query('searchTerm') searchTerm: string
+    ) {
+        const serviceParam = {
+            options: {
+                page: page,
+                limit: limit || 10,
+                route: '/search' + (searchTerm ? '?searchTerm=' + searchTerm : '')
+            },
+            searchTerm: searchTerm || ''
+        }
+
+        const data = {
+            title: "Cari Artikel",
+            articles: await this.articleService.findAll(serviceParam),
+            searchTerm: searchTerm
         };
 
         return {
