@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindManyOptions, Like, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { IPaginationOptions, Pagination, paginate } from 'nestjs-typeorm-paginate';
+import * as bcrypt from 'bcrypt';
 
 
 @Injectable()
@@ -43,5 +44,16 @@ export class UserService {
 
     async remove(id: number): Promise<void> {
         await this.userRepository.delete(id);
+    }
+
+    async login(email: string, password: string): Promise<User> {
+        const user = await this.userRepository.findOneBy({ email });
+        if (user) {
+            const isMatch = await bcrypt.compare(password, user.getPassword());
+            if (isMatch) {
+                return user;
+            }
+        }
+        return null;
     }
 }

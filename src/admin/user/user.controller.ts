@@ -37,11 +37,14 @@ export class UserController {
     @Post('/store')
     @Redirect('/admin/users')
     async store(@Body() body) {
+
+        const hash = await bcrypt.hash(body.password, 10);
+
         const user = new User();
 
         user.setName(body.name);
         user.setEmail(body.email);
-        user.setPassword(body.password);
+        user.setPassword(hash);
         await this.userService.createOrUpdate(user);
     }
 

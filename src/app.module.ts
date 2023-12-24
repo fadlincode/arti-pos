@@ -18,6 +18,7 @@ import { Article } from './admin/article/article.entity';
 import { ArticleService } from './admin/article/article.service';
 import { SettingService } from './admin/setting/setting.service';
 import { Setting } from './admin/setting/setting.entity';
+import { AuthController } from './auth/auth.controller';
 
 @Global()
 @Module({
@@ -46,7 +47,7 @@ import { Setting } from './admin/setting/setting.entity';
     ]),
     AdminModule
     ],
-    controllers: [AppController],
+    controllers: [AppController, AuthController],
     providers: [
         AppService, 
         LanguageService, 

@@ -6,6 +6,7 @@ import * as hbs from 'hbs';
 import * as hbsUtils from 'hbs-utils';
 import { SettingService } from './admin/setting/setting.service';
 import { evalHelper, logHelper, numbering, showingPagination, ternary } from './helpers/sites';
+import * as session from 'express-session';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -39,6 +40,24 @@ async function bootstrap() {
     hbs.registerHelper('ternary', ternary);
     hbs.registerHelper('numbering', numbering);
     hbs.registerHelper('showingPagination', showingPagination);
+
+
+    // Express Session
+    app.use(
+        session({
+            secret: 'nest-book',
+            resave: false,
+            saveUninitialized: false
+        }),
+    );
+
+    app.use('/admin*', function(req, res, next){
+        if (req.session.user) {
+            next();
+        } else {
+            res.redirect('/');
+        }
+    });
 
     await app.listen(3000);
 }
