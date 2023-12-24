@@ -53,6 +53,7 @@ async function bootstrap() {
 
     app.use('/admin*', function(req, res, next){
         if (req.session.user) {
+            res.locals.session = req.session;
             next();
         } else {
             res.redirect('/');

@@ -30,8 +30,8 @@ export class AuthController {
 
         if (user) {
             request.session.user = {
-                id: user.getId(),
-                name: user.getName(),
+                id: user.id,
+                name: user.name,
             };
             return response.redirect('/admin');
         } else {
