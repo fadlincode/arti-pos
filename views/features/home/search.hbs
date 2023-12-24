@@ -6,6 +6,9 @@
                     <div class="col-md-2"></div>
                     
                     <div class="col-md-8">
+                        <b class="text-danger">Kata Kunci :</b> {{data.searchTerm}}
+                        <hr>
+
                         {{> features/home/components/page_list 
                             news=data.articles.items
                             cardTitle=data.title 
