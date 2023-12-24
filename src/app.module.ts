@@ -21,50 +21,50 @@ import { Setting } from './admin/setting/setting.entity';
 
 @Global()
 @Module({
-  imports: [
+    imports: [
     ConfigModule.forRoot({
-      envFilePath: '.env',
+        envFilePath: '.env',
     }),
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.DATABASE_HOST,
-      port: parseInt(process.env.DATABASE_PORT),
-      username: process.env.DATABASE_USER,
-      password: process.env.DATABASE_PASSWORD,
-      database: process.env.DATABASE_NAME,
-      entities: ['dist/**/*.entity{.ts,.js}'],
-      synchronize: true,
+        type: 'mysql',
+        host: process.env.DATABASE_HOST,
+        port: parseInt(process.env.DATABASE_PORT),
+        username: process.env.DATABASE_USER,
+        password: process.env.DATABASE_PASSWORD,
+        database: process.env.DATABASE_NAME,
+        entities: ['dist/**/*.entity{.ts,.js}'],
+        synchronize: true,
     }),
     TypeOrmModule.forFeature([
-      Media,
-      Language,
-      Journalist,
-      Category,
-      User,
-      Article,
-      Setting
+        Media,
+        Language,
+        Journalist,
+        Category,
+        User,
+        Article,
+        Setting
     ]),
     AdminModule
-  ],
-  controllers: [AppController],
-  providers: [
-    AppService, 
-    LanguageService, 
-    MediaService, 
-    JournalistService, 
-    CategoryService, 
-    UserService,
-    ArticleService,
-    SettingService
-  ],
-  exports: [
-    LanguageService,
-    MediaService,
-    JournalistService,
-    CategoryService,
-    UserService,
-    ArticleService,
-    SettingService
-  ]
+    ],
+    controllers: [AppController],
+    providers: [
+        AppService, 
+        LanguageService, 
+        MediaService, 
+        JournalistService, 
+        CategoryService, 
+        UserService,
+        ArticleService,
+        SettingService
+    ],
+    exports: [
+        LanguageService,
+        MediaService,
+        JournalistService,
+        CategoryService,
+        UserService,
+        ArticleService,
+        SettingService
+    ]
 })
 export class AppModule {}
