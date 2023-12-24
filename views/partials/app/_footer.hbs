@@ -95,19 +95,27 @@
             $(document).ready(function() {
                 $('.updateLikeBtn').click(function() {
                     var article = parseInt($(this).data('id'));
+                    var checkLikes = localStorage.getItem(article);
+                    
+                    if (checkLikes !== "true") {
+                        $.ajax({
+                            type: 'POST',
+                            data: {id: article},
+                            url: '/updatelikes',
+                            success: function(response) {
+                                console.log(response.article.like_count);
+                                $('[data-id="' + article + '"].likeCount').text(response.article.like_count);
 
-                    $.ajax({
-                        type: 'POST',
-                        data: {id: article},
-                        url: '/updatelikes',
-                        success: function(response) {
-                            console.log(response.article.like_count);
-                            $('[data-id="' + article + '"].likeCount').text(response.article.like_count);
-                        },
-                        error: function(error) {
-                            console.error('Error updating likes:', error);
-                        }
-                    });
+                                localStorage.setItem(article, "true");
+                            },
+                            error: function(error) {
+                                console.error('Error updating likes:', error);
+                            }
+                        });
+                    } else {
+                        console.log('This article has been likes before');
+                    }
+                    
                 });
             });
         </script>
