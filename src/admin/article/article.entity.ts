@@ -41,6 +41,9 @@ export class Article {
     @Column()
     view_count: number;
 
+    @Column({ nullable: true })
+    is_keyword_generated: number;
+
     @Column()
     like_count: number;
 
@@ -113,6 +116,10 @@ export class Article {
 
     getDate(): Date {
         return this.date;
+    }
+
+    getIsKeywordGenerated(): number {
+        return this.is_keyword_generated;
     }
 
     getViewCount(): number {
