@@ -11,12 +11,17 @@
                         <div class="card-toolbar">
                             <ul class="nav nav-pills nav-pills-sm nav-dark-75">
                                 <li class="nav-item d-flex align-items-center">
-                                    <a class="btn btn-outline-success btn-icon" href="/admin/articles" title="Refresh">
+                                    <button class="btn btn-success " data-toggle="modal" title="Tambah" data-target="#addModal">
+                                        Tambah
+                                    </button>
+                                </li>
+                                <li class="nav-item d-flex align-items-center">
+                                    <a class="btn btn-outline-success btn-icon" href="/admin/keywords" title="Refresh">
                                         <i class="fas fa-undo"></i>
                                     </a>
                                 </li>
                                 <li class="nav-item d-flex align-items-center">
-                                    <form action="/admin/articles" method="GET">
+                                    <form action="/admin/keywords" method="GET">
                                         <div class="input-group">
                                             <input type="text" class="form-control" name="searchTerm" placeholder="Search for..." />
                                         </div>
@@ -32,27 +37,22 @@
                                     <tr>
                                         <th style="width: 5%">No</th>
                                         <th style="width: 200px">Aksi</th>
-                                        <th style="width: auto">Title</th>
-                                        <th style="width: auto">Tanggal</th>
-                                        <th style="width: auto">Media</th>
-                                        <th style="width: auto">Bahasa</th>
-                                        <th style="width: auto">Jurnalis</th>
+                                        <th style="width: auto">Kata</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{#each data.articles.items}}
+                                    {{#each data.keywords.items}}
                                     <tr>
-                                        <td>{{numbering ../data.articles.meta.currentPage ../data.articles.meta.itemsPerPage @index }}</td>
+                                        <td>{{numbering ../data.keywords.meta.currentPage ../data.keywords.meta.itemsPerPage @index }}</td>
                                         <td>
+                                            <a href="/admin/keywords/{{ getId }}" class="label label-inline label-warning">
+                                                edit
+                                            </a>
                                             <a href="#" class="label label-inline label-danger" data-toggle="modal" title="Tambah" data-target="#deleteModal{{ getId }}">
                                                 hapus
                                             </a>
                                         </td>
-                                        <td>{{ getTitle }}</td>
-                                        <td>{{ getDate }}</td>
-                                        <td>{{ media.name }}</td>
-                                        <td>{{ language.name }}</td>
-                                        <td>{{ journalist.name }}</td>
+                                        <td>{{ getWord }}</td>
                                     </tr>
                                     <div class="modal fade" id="deleteModal{{ getId }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-xs">
@@ -64,11 +64,11 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="/admin/articles/{{ getId }}" method="POST">
+                                                    <form action="/admin/keywords/{{ getId }}" method="POST">
                                                         <div class="form-group">
                                                             Apakah anda yakin akan menghapus data ini ?
                                                             <br>
-                                                            Data : <b class="text-danger">{{ getName }}</b>
+                                                            Data : <b class="text-danger">{{ getWord }}</b>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -95,7 +95,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="/admin/articles/store" method="POST">                     
+                                        <form action="/admin/keywords/store" method="POST">                     
                                             <div class="form-group">
                                                 <label for="name">Nama <span class="text-danger">*</span></label>
                                                 <input class="form-control form-control-lg" name="name" id="name" type="text" placeholder="Nama" required/>
@@ -111,7 +111,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        {{#with data.articles}}
+                        {{#with data.keywords}}
                         <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
                             <div class="">
                                  <b>Showing : </b>

@@ -16,28 +16,36 @@
     </div>
 </div>
 
-<div class="row mt-4">
-    <div class="col-md-4">
+<div class="row mt-6">
+    <div class="col-md-6">
         {{> features/home/components/card_list 
-            news=data.articles.trendings.items
+            news=data.articles.crime.items
             cardTitle="Crime" 
             cardLink="/page/crime"
             cardHeight="680px"
         }}
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
         {{> features/home/components/card_list 
-            news=data.articles.trendings.items
+            news=data.articles.education.items
             cardTitle="Education" 
             cardLink="/page/education"
             cardHeight="680px"
         }}
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
         {{> features/home/components/card_list 
-            news=data.articles.trendings.items
+            news=data.articles.sport.items
             cardTitle="Sports" 
             cardLink="/page/sports"
+            cardHeight="680px"
+        }}
+    </div>
+    <div class="col-md-6">
+        {{> features/home/components/card_list 
+            news=data.articles.government.items
+            cardTitle="Pemerintah" 
+            cardLink="/page/pemerintah"
             cardHeight="680px"
         }}
     </div>

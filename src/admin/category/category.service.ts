@@ -28,6 +28,14 @@ export class CategoryService {
     findOne(id: number): Promise<Category | null> {
         return this.categoryRepository.findOneBy({ id });
     }
+
+    findByName(name: string): Promise<Category | null> {
+        return this.categoryRepository
+                    .createQueryBuilder('category')
+                    .where('LOWER(category.name) LIKE LOWER(:name)', { name: `${name}` })
+                    .getOne();
+
+    }
     
     createOrUpdate(category: Category): Promise<Category> {
         return this.categoryRepository.save(category);

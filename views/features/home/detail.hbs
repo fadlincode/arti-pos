@@ -38,7 +38,7 @@
                                     <div class="bgi-no-repeat bgi-size-cover rounded min-h-500px" style="background-image: url({{getImage}})"></div>
                                     
                                     <p class="text-dark-75 font-size-lg font-weight-normal pt-5 mb-2">
-                                        {{getContent}}
+                                        {{#if getSummaryOriginal}} {{getSummaryOriginal}} {{else}} {{getContent}} {{/if}}
                                     </p>
                                 </div>
 

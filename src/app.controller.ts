@@ -1,12 +1,17 @@
 import { Body, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Post, Query, Render, Req, Res } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ArticleService } from './admin/article/article.service';
+import { CategoryService } from './admin/category/category.service';
+import { ArticleCategoryService } from './admin/article_category/articleCategory.service';
 
 @Controller()
 export class AppController {
     constructor(
         private readonly appService: AppService,
-        private readonly articleService: ArticleService
+        private readonly articleService: ArticleService,
+        private readonly categoryService: CategoryService,
+        private readonly articleCategoryService: ArticleCategoryService
+
     ) {}
 
     @Get('/')
@@ -24,7 +29,14 @@ export class AppController {
             title: 'Index',
             content: 'This is content',
             articles: {
-                trendings: await this.articleService.findAll(serviceParam),
+                trendings: await this.articleCategoryService.findAll(serviceParam, 1),
+                crime: await this.articleCategoryService.findAll(serviceParam, 2),
+                business: await this.articleCategoryService.findAll(serviceParam, 3),
+                education: await this.articleCategoryService.findAll(serviceParam, 4),
+                sport: await this.articleCategoryService.findAll(serviceParam, 5),
+                entertainment: await this.articleCategoryService.findAll(serviceParam, 6),
+                government: await this.articleCategoryService.findAll(serviceParam, 7),
+                travel: await this.articleCategoryService.findAll(serviceParam, 8),
             }
         };
 
@@ -49,7 +61,7 @@ export class AppController {
         const data = {
             title: 'Detail Berita',
             article: await this.articleService.findBySlug(slug),
-            trendings: await this.articleService.findAll(serviceParam),
+            trendings: await this.articleCategoryService.findAll(serviceParam, 1),
         };
 
         return {
@@ -64,6 +76,8 @@ export class AppController {
         @Query('limit') limit: number,
         @Param('category') category: string
     ) {
+        
+        const getCategory = await this.categoryService.findByName(category);
         const serviceParam = {
             options: {
                 page: page,
@@ -74,7 +88,7 @@ export class AppController {
 
         const data = {
             title: category.toUpperCase(),
-            articles: await this.articleService.findAll(serviceParam)
+            articles: await this.articleCategoryService.findAll(serviceParam, getCategory.getId())
         };
 
         return {

@@ -19,6 +19,7 @@ export class ArticleService {
         }
 
         queryBuilder
+            .orderBy("article.date", "DESC")
             .leftJoinAndSelect('article.media', 'media')
             .leftJoinAndSelect('article.language', 'language')
             .leftJoinAndSelect('article.journalist', 'journalist');

@@ -7,6 +7,7 @@ import { CategoryController } from "./category/category.controller";
 import { UserController } from "./user/user.controller";
 import { ArticleController } from "./article/article.controller";
 import { SettingController } from "./setting/setting.controller";
+import { KeywordController } from "./keyword/keyword.controller";
 
 @Module({
     controllers: [
@@ -17,7 +18,8 @@ import { SettingController } from "./setting/setting.controller";
         CategoryController,
         UserController,
         ArticleController,
-        SettingController
+        SettingController,
+        KeywordController
     ]
 })
 export class AdminModule {}

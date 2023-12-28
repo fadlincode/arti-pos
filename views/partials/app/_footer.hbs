@@ -103,9 +103,8 @@
                             data: {id: article},
                             url: '/updatelikes',
                             success: function(response) {
-                                console.log(response.article.like_count);
-                                $('[data-id="' + article + '"].likeCount').text(response.article.like_count);
-
+                                console.log(response);
+                                $('[data-id="' + response.article.id + '"].likeCount').text(response.article.like_count);
                                 localStorage.setItem(article, "true");
                             },
                             error: function(error) {
