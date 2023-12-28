@@ -22,13 +22,13 @@
 <div class="row mt-4">
     <div class="col-md-3">
         {{> features/home/components/rectangle_vertical_image 
-            news=data.articles.trendings.items.[5]
+            news=data.articles.entertainment.items.[5].article
             cardColor="rgba(255, 255, 255, 0.52), rgba(26, 194, 62, 0.73)"
         }}
     </div>
     <div class="col-md-9">
         {{> features/home/components/card_list 
-            news=data.articles.trendings.items
+            news=data.articles.entertainment.items
             cardTitle="Terbaru" 
             cardLink="/page/entertainment"
             cardHeight="680px"

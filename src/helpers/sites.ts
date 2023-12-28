@@ -1,3 +1,6 @@
+import { format, parse } from "date-fns";
+import { id } from 'date-fns/locale';
+
 // numbering table
 export function evalHelper(...args: any[]): any {
     args.pop();
@@ -20,7 +23,7 @@ export function numbering(currentPage: number, perPage: number, index: number): 
     return ((currentPage - 1) * perPage) + (index + 1) ;
 }
 
+// showing current data pagination on handlebars
 export function showingPagination(currentPage: number, perPage: number, itemCount: number, totalItems: number): string {
     return (((currentPage - 1) * perPage) + (1)) + ' - '+ (((currentPage - 1) * perPage) + itemCount) + ' of ' + totalItems ;
 }
-

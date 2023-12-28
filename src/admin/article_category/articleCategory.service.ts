@@ -11,10 +11,10 @@ export class ArticleCategoryService {
         private articleRepository: Repository<ArticleCategory>,
     ) {}
 
-    async findAll(serviceParam?: { options? : IPaginationOptions; categoryId: number }): Promise<Pagination<ArticleCategory>> {
+    async findAll(serviceParam?: { options? : IPaginationOptions; }, categoryId?: number): Promise<Pagination<ArticleCategory>> {
         const queryBuilder = this.articleRepository.createQueryBuilder('article_category');
         
-        queryBuilder.where('article_category.category_id = :category_id', { category_id: serviceParam.categoryId })
+        queryBuilder.where('article_category.category_id = :category_id', { category_id: categoryId })
                     .orderBy("article.date", "DESC")
                     .leftJoinAndSelect('article_category.category', 'category')
                     .leftJoinAndSelect('article_category.article', 'article')
