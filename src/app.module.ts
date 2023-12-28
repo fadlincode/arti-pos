@@ -21,6 +21,8 @@ import { Setting } from './admin/setting/setting.entity';
 import { AuthController } from './auth/auth.controller';
 import { Keyword } from './admin/keyword/keyword.entity';
 import { KeywordService } from './admin/keyword/keyword.service';
+import { ArticleCategory } from './admin/article_category/articleCategory.entity';
+import { ArticleCategoryService } from './admin/article_category/articleCategory.service';
 
 @Global()
 @Module({
@@ -46,7 +48,8 @@ import { KeywordService } from './admin/keyword/keyword.service';
         User,
         Article,
         Setting,
-        Keyword
+        Keyword,
+        ArticleCategory
     ]),
     AdminModule
     ],
@@ -60,7 +63,8 @@ import { KeywordService } from './admin/keyword/keyword.service';
         UserService,
         ArticleService,
         SettingService,
-        KeywordService
+        KeywordService,
+        ArticleCategoryService
     ],
     exports: [
         LanguageService,
@@ -70,7 +74,8 @@ import { KeywordService } from './admin/keyword/keyword.service';
         UserService,
         ArticleService,
         SettingService,
-        KeywordService
+        KeywordService,
+        ArticleCategoryService
     ]
 })
 export class AppModule {}

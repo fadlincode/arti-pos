@@ -1,7 +1,8 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Media } from '../media/media.entity';
 import { Language } from '../language/language.entity';
 import { Journalist } from '../journalist/journalist.entity';
+import { ArticleCategory } from '../article_category/articleCategory.entity';
 
 @Entity({ name: 'articles' })
 export class Article {
@@ -44,6 +45,9 @@ export class Article {
     @Column({ nullable: true })
     is_keyword_generated: number;
 
+    @Column({ nullable: true })
+    is_categorized: number;
+
     @Column()
     like_count: number;
 
@@ -73,6 +77,9 @@ export class Article {
     @ManyToOne(() => Journalist)
     @JoinColumn({ name: 'journalist_id' })
     journalist: Journalist;
+
+    @OneToMany(() => ArticleCategory, (articleCategory) => articleCategory.article)
+    articleCategory: ArticleCategory[]
 
     getId(): number {
         return this.id;
@@ -120,6 +127,10 @@ export class Article {
 
     getIsKeywordGenerated(): number {
         return this.is_keyword_generated;
+    }
+
+    getIsCategorized(): number {
+        return this.is_categorized;
     }
 
     getViewCount(): number {
